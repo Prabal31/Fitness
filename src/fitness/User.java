@@ -9,7 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -21,17 +23,45 @@ public class User extends Application {
     TextField phonenumber=new TextField();
     TextField password=new TextField();
     Button submit=new Button("Submit");
+    
 
 
     @Override
     public void start(Stage window) {
-        GridPane pane=new GridPane();
+        
         window.setTitle("Welcome");
+        
+        HBox main=new HBox();
+        
+        Button login=new Button("log in");
+        Button signup=new Button("Sign up");
+        
+        signup.setOnAction(e-> signup());
+        
+        login.setOnAction(e-> login());
+        
+        
+        main.getChildren().addAll(login,signup);
+        main.setAlignment(Pos.CENTER);
+        BorderPane layout=new BorderPane();
+        layout.setCenter(main);
+        Scene scene=new Scene(layout,500,500);
+        window.setScene(scene);;
+        window.show();
+            
+    }
+    public static void main(String[] args) {
+        launch(args);
+    }
+    
+    public void signup() {
+        Stage signStage=new Stage();
+        GridPane pane=new GridPane();
         
         //Fullname label
         pane.add(new Label("Full Name"), 0, 0);
         pane.add(fullname, 1, 0);
-                fullname.setAlignment(Pos.BOTTOM_RIGHT);
+        fullname.setAlignment(Pos.BOTTOM_RIGHT);
 
         //Email label
         pane.add(new Label("Email"), 0, 1);
@@ -60,14 +90,29 @@ public class User extends Application {
         
         pane.setAlignment(Pos.CENTER);
         Scene scene=new Scene(pane,500,500);
-        window.setScene(scene);
-        window.show();
-
-        
-        
+        signStage.setScene(scene);
+        signStage.show();
     }
-    public static void main(String[] args) {
-        launch(args);
+    public void login() {
+        Stage logStage =new Stage();
+        GridPane layout =new GridPane();
+        TextField emailtextField=new TextField();
+        layout.add(new Label("Email"), 0, 2);
+        layout.add(emailtextField, 1, 2);
+        emailtextField.setAlignment(Pos.BOTTOM_RIGHT);
+        
+        TextField passwordtextField=new TextField();
+        layout.add(new Label("Password"), 0, 1);
+        layout.add(passwordtextField, 1, 1);
+        passwordtextField.setAlignment(Pos.BOTTOM_RIGHT);
+        
+        layout.setAlignment(Pos.CENTER);
+        
+        Scene scene=new Scene(layout,500,500);
+        
+        logStage.setScene(scene);
+        logStage.show();
+        
     }
     
 }
