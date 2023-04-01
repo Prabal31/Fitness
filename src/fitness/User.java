@@ -40,7 +40,17 @@ public class User extends Application {
     public void start(Stage window) {
         BorderPane layout=new BorderPane();
         window.setTitle("Welcome");
-        //ImageView image=new ImageView("main.jpg");
+        ImageView View = new ImageView("D:/Second Sem/Java 2/Fitness/src/fitness/main.jpg");
+    
+        // set the size and position of the ImageView
+        View.setFitWidth(500);
+        View.setFitHeight(500);
+        View.setPreserveRatio(false);
+        View.setSmooth(true);
+        View.setCache(true);
+
+        // add the ImageView to the layout
+        layout.getChildren().add(View);
         
         HBox main=new HBox(20);
         main.setPadding(new Insets(20,20,50,50));
@@ -144,15 +154,15 @@ public class User extends Application {
         GridPane layout =new GridPane();
         
         TextField emailtextField=new TextField();
-        layout.add(new Label("Email"), 0, 2);
+        layout.add(new Label("Email"), 0, 1);
         
-        layout.add(emailtextField, 1, 2);
+        layout.add(emailtextField, 1, 1);
         emailtextField.setAlignment(Pos.BOTTOM_RIGHT);
         
         TextField passwordtextField=new TextField();
-        layout.add(new Label("Password"), 0, 1);
+        layout.add(new Label("Password"), 0, 2);
         
-        layout.add(passwordtextField, 1, 1);
+        layout.add(passwordtextField, 1, 2);
         passwordtextField.setAlignment(Pos.BOTTOM_RIGHT);
         
         Button log=new Button("Log in");
@@ -164,12 +174,12 @@ public class User extends Application {
         String[] userData = data.loadData();
         if (userData == null || !userData[1].equals(emailtextField.getText())
                 || !userData[3].equals(passwordtextField.getText())) {
-            
+            System.out.println("Wrong details");
             // Login failed
             // Show an error message or do something else
         } 
         else {
-            // Login successful
+             System.out.println("Login successful");
             // Proceed with the rest of the application
         }
     });
