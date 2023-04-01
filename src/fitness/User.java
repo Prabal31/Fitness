@@ -33,6 +33,8 @@ public class User extends Application {
     TextField password=new TextField();
     
     Button submit=new Button("Submit");
+    
+    Data data=new Data();
 
     @Override
     public void start(Stage window) {
@@ -113,15 +115,18 @@ public class User extends Application {
         Label mess=new Label("");
         pane.add(mess, 0, 6);
         
-        
-        
-        if(fullname.getText()==null||email.getText()==null||conformemail.getText()==null||phonenumber.getText()==null||password.getText()==null) {
-            mess.setText("Please fill all the details");
-            mess.setTextFill(Color.RED);
-        }
-        else {
-            sign.setOnAction(e->plan());
-        }
+        sign.setOnAction(e -> {
+            if (fullname.getText() == null || email.getText() == null || conformemail.getText() == null
+                    || phonenumber.getText() == null || password.getText() == null) {
+                
+                mess.setText("Please fill all the details");
+                mess.setTextFill(Color.RED);
+            } 
+            else {
+                data.saveData(fullname.getText(), email.getText(), phonenumber.getText(), password.getText());
+                plan();
+            }
+        });
         
         
         pane.setAlignment(Pos.CENTER);
@@ -154,6 +159,21 @@ public class User extends Application {
         layout.add(log, 1, 5);
         GridPane.setHalignment(log, HPos.RIGHT);
         
+        log.setOnAction(e -> {
+            
+        String[] userData = data.loadData();
+        if (userData == null || !userData[1].equals(emailtextField.getText())
+                || !userData[3].equals(passwordtextField.getText())) {
+            
+            // Login failed
+            // Show an error message or do something else
+        } 
+        else {
+            // Login successful
+            // Proceed with the rest of the application
+        }
+    });
+        
         layout.setAlignment(Pos.CENTER);
         
         Scene scene=new Scene(layout,500,500);
@@ -172,9 +192,6 @@ public class User extends Application {
         Scene scene=new Scene(pane,500,500);
         plans.setScene(scene);
         plans.show();
-        
-        
-        
         
     }
     
