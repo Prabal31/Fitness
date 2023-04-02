@@ -1,6 +1,7 @@
 package fitness;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,8 +13,11 @@ public class Data {
         
         try {
             
-            FileWriter writer = new FileWriter("user_data.txt");
-            writer.write(name + "," + email + "," + phone + "," + password);
+            File file = new File("user_data.txt");
+            
+            FileWriter writer = new FileWriter(file, true); // true to append
+            
+            writer.write(name + "," + email + "," + phone + "," + password + "\n"); // add a newline character
             writer.close();
         } 
         
