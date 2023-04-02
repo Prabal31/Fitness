@@ -1,6 +1,7 @@
 package fitness;
 
-import java.awt.Image;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -8,16 +9,16 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class User extends Application {
@@ -30,7 +31,7 @@ public class User extends Application {
     
     TextField phonenumber=new TextField();
     
-    TextField password=new TextField();
+    PasswordField password=new PasswordField();
     
     Button submit=new Button("Submit");
     
@@ -67,7 +68,7 @@ public class User extends Application {
         
         main.setAlignment(Pos.TOP_RIGHT);
         
-        Line line=new Line(0,100,500,100);
+        Line line=new Line(0,70,500,70);
         layout.setTop(main);
         layout.getChildren().add(line);
         Scene scene=new Scene(layout,500,500);
@@ -75,12 +76,6 @@ public class User extends Application {
         window.setScene(scene);;
         window.show();
             
-    }
-    
-    public static void main(String[] args) {
-        
-        launch(args);
-        
     }
     
     public void signup() {
@@ -123,22 +118,69 @@ public class User extends Application {
         GridPane.setHalignment(sign, HPos.RIGHT);
         
         Label mess=new Label("");
-        pane.add(mess, 0, 6);
+        pane.add(mess, 0, 7);
         
         sign.setOnAction(e -> {
-            if (fullname.getText() == null || email.getText() == null || conformemail.getText() == null
-                    || phonenumber.getText() == null || password.getText() == null) {
+            while (true) {
+                String fullName = fullname.getText();
+                String emailText = email.getText();
+                String conformEmailText = conformemail.getText();
+                String phoneNumberText = phonenumber.getText();
+                String passwordText = password.getText();
+
+                try {
+                    
+                    if (fullName == null || fullName.isEmpty() ||
+                        emailText == null || emailText.isEmpty() ||
+                        conformEmailText == null || conformEmailText.isEmpty() ||
+                        phoneNumberText == null || phoneNumberText.isEmpty() ||
+                        passwordText == null || passwordText.isEmpty()) {
+                        
+                        throw new Exception("Please fill in all the details.");
+                    } 
+
+                    if (!Valid(emailText)) {
+                        
+                        throw new Exception("Please enter a valid email address.");
+                    } 
+
+                    if (!emailText.equals(conformEmailText)) {
+                        
+                        throw new Exception("The email addresses you entered do not match.");
+                    } 
+
+                    if (!fullName.matches("^[a-zA-Z]*$")) {
+                        
+                        throw new Exception("Please enter a valid name.");
+                    } 
+
+                    if (phoneNumberText.length() != 10 || !phoneNumberText.matches("\\d+")) {
+                        
+                        throw new Exception("Please enter a 10-digit phone number.");
+                    } 
+
+                    if (passwordText.length() < 5) {
+                        
+                        throw new Exception("Password must be at least 5 characters long.");
+                    }
+
+                    // all input is valid
+                    data.saveData(fullName, emailText, phoneNumberText, passwordText);
+                    data.print();
+                    
+                    return; // exit the method
+                } 
                 
-                mess.setText("Please fill all the details");
-                mess.setTextFill(Color.RED);
-            } 
-            else {
-                data.saveData(fullname.getText(), email.getText(), phonenumber.getText(), password.getText());
-                plan();
+                catch (Exception ex) {
+                    
+                    mess.setText(ex.getMessage());
+                    mess.setTextFill(Color.RED);
+                    
+                    break; // exit the loop and wait for user input again
+                }
             }
         });
-        
-        
+
         pane.setAlignment(Pos.CENTER);
         Scene scene=new Scene(pane,500,500);
         
@@ -159,26 +201,31 @@ public class User extends Application {
         layout.add(emailtextField, 1, 1);
         emailtextField.setAlignment(Pos.BOTTOM_RIGHT);
         
-        TextField passwordtextField=new TextField();
+        PasswordField passwordtextField=new PasswordField();
         layout.add(new Label("Password"), 0, 2);
         
         layout.add(passwordtextField, 1, 2);
         passwordtextField.setAlignment(Pos.BOTTOM_RIGHT);
         
         Button log=new Button("Log in");
+        
         layout.add(log, 1, 5);
         GridPane.setHalignment(log, HPos.RIGHT);
         
         log.setOnAction(e -> {
             
         String[] userData = data.loadData();
+        
         if (userData == null || !userData[1].equals(emailtextField.getText())
                 || !userData[3].equals(passwordtextField.getText())) {
+            
             System.out.println("Wrong details");
             // Login failed
             // Show an error message or do something else
         } 
+        
         else {
+            
              System.out.println("Login successful");
             // Proceed with the rest of the application
         }
@@ -192,16 +239,20 @@ public class User extends Application {
         logStage.show();
         
     }
-    public void plan() {
-        Stage plans=new Stage();
-        Label heading=new Label("Please choose your plans");
-        BorderPane pane=new BorderPane();
-        pane.setTop(heading);
+    
+    public static boolean Valid(String email) {
         
+        String regex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z]{2,}$";
         
-        Scene scene=new Scene(pane,500,500);
-        plans.setScene(scene);
-        plans.show();
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+    //main method
+    public static void main(String[] args) {
+        
+        launch(args);
         
     }
     
