@@ -6,10 +6,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,6 +30,13 @@ import javafx.stage.Stage;
 
 
 public class Data {
+    
+    Image logo = new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\logo.jpg");
+    
+    Image background=new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\background.jpg");
+
+    
+    ImageView Logo = new ImageView(logo);
     
     public void saveData(String name, String email, String phone, String password) {
         
@@ -175,5 +184,90 @@ public class Data {
         Scene scene = new Scene(grid, 400, 550);
         home.setScene(scene);
         home.show();
+    }
+    
+    
+    public void goal() {
+        Stage goal =new Stage();
+        GridPane pane = new GridPane();
+        pane.setHgap(10);
+        pane.setVgap(10);
+        pane.setPadding(new Insets(20));
+        
+        pane.setAlignment(Pos.TOP_CENTER);
+        
+        goal.getIcons().add(logo);
+
+        // Set the properties of the image view
+        BackgroundImage view = new BackgroundImage(background,
+        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+        new BackgroundSize(goal.getWidth(), goal.getHeight(), false, false, false, true));
+        pane.setBackground(new Background(view));
+        
+        Logo.setFitWidth(100);
+        Logo.setFitHeight(100);
+        
+        
+        
+        HBox Logobox=new HBox();
+        Logobox.getChildren().add(Logo);
+        
+        Logobox.setAlignment(Pos.CENTER);
+        pane.add(Logobox, 0, 0,2,1);
+        
+        pane.setVgap(20);// set spacing between images;
+        pane.setAlignment(Pos.TOP_CENTER); // align images to center
+        
+        HBox goalbox=new HBox();
+        Label setyourgoallabel=new Label("Set your goal");
+        
+        setyourgoallabel.setFont(Font.font(24));
+        goalbox.setAlignment(Pos.CENTER);
+        
+        setyourgoallabel.setTextFill(Color.AQUA);
+        goalbox.getChildren().add(setyourgoallabel);
+        
+        pane.add(goalbox, 0, 1,2,1);
+        
+        ImageView startImage = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\1.png"));
+        ImageView midImage = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\2.png"));
+        ImageView endImage = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\3.png"));
+        
+        startImage.setFitWidth(100);
+        startImage.setFitHeight(100);
+        
+        midImage.setFitWidth(100);
+        midImage.setFitHeight(100);
+        
+        endImage.setFitWidth(100);
+        endImage.setFitHeight(100);
+        
+        HBox images=new HBox(30);
+        images.getChildren().addAll(startImage,midImage,endImage);
+        
+        pane.add(images, 0, 2,2,1);
+        
+        // Create a slider with start, mid, and end values
+        Slider slider = new Slider();
+        slider.setOrientation(Orientation.HORIZONTAL);
+        slider.setMin(0);
+        slider.setMax(2);
+        slider.setValue(1);
+
+        // Set the tick marks and labels for the slider
+        slider.setMajorTickUnit(1);
+        slider.setMinorTickCount(0);
+        slider.setShowTickLabels(true);
+        slider.setShowTickMarks(true);
+        slider.setSnapToTicks(true);
+
+        // Create a layout and add the slider and labels
+        
+        pane.add(slider, 0, 3,2,1);
+
+        // Set the scene and show the stage
+        Scene scene = new Scene(pane, 400, 550);
+        goal.setScene(scene);
+        goal.show();
     }
 }
