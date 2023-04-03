@@ -6,18 +6,28 @@ import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -36,94 +46,331 @@ public class User extends Application {
     Button submit=new Button("Submit");
     
     Data data=new Data();
-
-    @Override
-    public void start(Stage window) {
-        BorderPane layout=new BorderPane();
-        window.setTitle("Welcome");
-        ImageView View = new ImageView("D:/Second Sem/Java 2/Fitness/src/fitness/main.jpg");
     
-        // set the size and position of the ImageView
-        View.setFitWidth(500);
-        View.setFitHeight(500);
-        View.setPreserveRatio(false);
-        View.setSmooth(true);
-        View.setCache(true);
+    Image logo = new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\logo.jpg");
+    
+    Image background=new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\background.jpg");
 
-        // add the ImageView to the layout
-        layout.getChildren().add(View);
+    
+    ImageView Logo = new ImageView(logo);
+    
+    @Override
+   public void start(Stage window) {
+       
+        GridPane layout = new GridPane();
+        layout.setAlignment(Pos.TOP_CENTER);
         
-        HBox main=new HBox(20);
-        main.setPadding(new Insets(20,20,50,50));
+        layout.setVgap(15);
+        window.setTitle("Welcome");
+
+        window.getIcons().add(logo);
+
+        // Set the properties of the image view
+        BackgroundImage view = new BackgroundImage(background,
+        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+        new BackgroundSize(window.getWidth(), window.getHeight(), false, false, false, true));
+        layout.setBackground(new Background(view));
         
-        Button login=new Button("log in");
-        Button signup=new Button("Sign up");
-        
-        signup.setOnAction(e-> signup());
-        
-        login.setOnAction(e-> login());
+        Logo.setFitWidth(100);
+        Logo.setFitHeight(100);
         
         
-        main.getChildren().addAll(login,signup);
         
-        main.setAlignment(Pos.TOP_RIGHT);
+        HBox Logobox=new HBox();
+        Logobox.getChildren().add(Logo);
         
-        Line line=new Line(0,70,500,70);
-        layout.setTop(main);
-        layout.getChildren().add(line);
-        Scene scene=new Scene(layout,500,500);
+        Logobox.setAlignment(Pos.CENTER);
+        layout.add(Logobox, 0, 0,2,1);
         
-        window.setScene(scene);;
-        window.show();
-            
-    }
+        GridPane.setValignment(Logobox, VPos.TOP);
+
+        
+        
+        HBox headingbox=new HBox();
+        Label tracker=new Label("My Fitness Tracker");
+        
+        tracker.setFont(Font.font(35));
+        headingbox.setAlignment(Pos.TOP_CENTER);
+        
+        headingbox.getChildren().add(tracker);
+        layout.add(headingbox, 0, 1, 2, 1);
+        
+        GridPane.setColumnSpan(headingbox, 2);
+        GridPane.setValignment(headingbox, VPos.TOP);
+
+        
+        
+        HBox welcomebox=new HBox();
+        Label welcome=new Label("Welcome Back!");
+        
+        welcome.setTextFill(Color.WHITE);
+        welcome.setFont(Font.font(24));
+        
+        welcomebox.setAlignment(Pos.CENTER);
+        welcomebox.getChildren().add(welcome);
+        
+        layout.add(welcomebox, 0, 2,2,1);
+        
+        
+        
+        HBox emailBox = new HBox();
+        emailBox.setAlignment(Pos.CENTER_RIGHT);
+        Label emailLabel = new Label("Email");
+
+        emailLabel.setTextFill(Color.AQUA);
+        emailLabel.setFont(Font.font(24));
+
+        TextField emailTextField = new TextField();
+        emailTextField.setFont(Font.font(16));
+        
+        emailBox.getChildren().addAll(emailLabel, emailTextField);
+        layout.add(emailBox, 0, 3, 2, 1);
+        emailTextField.setAlignment(Pos.BOTTOM_RIGHT);
+
+        
+        
+        HBox passwordBox = new HBox();
+        passwordBox.setAlignment(Pos.CENTER_RIGHT);
+        Label passwordLabel = new Label("Password");
+        passwordLabel.setTextFill(Color.AQUA);
+
+        passwordLabel.setFont(Font.font(24));
+        PasswordField passwordTextField = new PasswordField();
+
+        passwordTextField.setFont(Font.font(16));
+        passwordBox.getChildren().addAll(passwordLabel, passwordTextField);
+
+        layout.add(passwordBox, 0, 4, 2, 1);
+        passwordTextField.setAlignment(Pos.BOTTOM_RIGHT);
+
+        Button log=new Button("Log in");
+        log.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
+        
+        layout.add(log, 1, 5);
+        GridPane.setHalignment(log, HPos.RIGHT);
+
+        
+        
+        Line line = new Line();
+        line.setStartX(0);
+        
+        line.setEndX(300);
+        line.setStrokeWidth(2);
+
+        layout.add(line, 0, 7, 2, 1);
+        
+        
+        
+        HBox newuserbox=new HBox();
+        Label newuserLabel=new Label("New to Activity Fitness?");
+        
+        newuserLabel.setFont(Font.font(24));
+        newuserbox.setAlignment(Pos.CENTER);
+        
+        newuserLabel.setTextFill(Color.AQUA);
+        newuserbox.getChildren().add(newuserLabel);
+        
+        layout.add(newuserbox, 0, 8,2,1);
+        Button signin=new Button("Create Account");
+        
+        signin.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
+        layout.add(signin, 0, 9,2,1);
+        GridPane.setHalignment(signin, HPos.CENTER);
+        
+        
+        
+        log.setOnAction(e -> {
+
+            String[] userData = data.loadData();
+
+            if (userData == null || !userData[1].equals(emailTextField.getText())
+                    || !userData[3].equals(passwordTextField.getText())) {
+
+                System.out.println("Wrong details");
+                // Login failed
+                // Show an error message or do something else
+            } 
+
+            else {
+
+                 System.out.println("Login successful");
+                // Proceed with the rest of the application
+            }
+        });
+        
+        signin.setOnAction(e-> signup());
+
+    Scene scene = new Scene(layout, 400, 550);
+    window.setScene(scene);
+    
+    window.show();
+}
     
     public void signup() {
         
         Stage signStage=new Stage();
         GridPane pane=new GridPane();
         
-        //Fullname label
-        pane.add(new Label("Full Name"), 0, 0);
-        pane.add(fullname, 1, 0);
+        pane.setVgap(15);
+        pane.setAlignment(Pos.TOP_CENTER);
         
-        fullname.setAlignment(Pos.BOTTOM_RIGHT);
+        signStage.getIcons().add(logo);
+        
+        BackgroundImage view = new BackgroundImage(background,
+        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+        new BackgroundSize(signStage.getWidth(), signStage.getHeight(), false, false, false, true));
+        pane.setBackground(new Background(view));
+        
+        
+        HBox Logobox=new HBox();
+        Logobox.getChildren().add(Logo);
+        
+        Logobox.setAlignment(Pos.CENTER);
+        pane.add(Logobox, 0, 0,2,1);
+        
+        GridPane.setValignment(Logobox, VPos.TOP);
 
-        //Email label
-        pane.add(new Label("Email"), 0, 1);
-        pane.add(email, 1, 1);
         
+        
+        HBox headingbox=new HBox();
+        Label tracker=new Label("My Fitness Tracker");
+        
+        tracker.setFont(Font.font(35));
+        headingbox.setAlignment(Pos.TOP_CENTER);
+        
+        headingbox.getChildren().add(tracker);
+        pane.add(headingbox, 0, 1, 2, 1);
+        
+        GridPane.setColumnSpan(headingbox, 2);
+        GridPane.setValignment(headingbox, VPos.TOP);
+
+        
+        
+        HBox welcomebox=new HBox();
+        Label welcome=new Label("Fill in the details!");
+        welcome.setTextFill(Color.WHITE);
+        
+        welcome.setFont(Font.font(24));
+        welcomebox.setAlignment(Pos.CENTER);
+        
+        welcomebox.getChildren().add(welcome);
+        pane.add(welcomebox, 0, 2,2,1);
+
+        
+        
+        
+        
+        
+        // Full Name field
+        HBox fullnameBox = new HBox();
+        fullnameBox.setAlignment(Pos.CENTER_RIGHT);
+        
+        Label fullnameLabel = new Label("Full name:");
+        fullnameLabel.setTextFill(Color.AQUA);
+        
+        fullnameLabel.setFont(Font.font(24));
+        TextField fullname = new TextField();
+
+        fullname.setFont(Font.font(16)); 
+        fullnameBox.getChildren().addAll(fullnameLabel, fullname);
+        
+        pane.add(fullnameBox, 0, 3, 2, 1);
+        fullname.setAlignment(Pos.BOTTOM_RIGHT);
+        
+        
+        
+        
+        
+        //Email name field
+        HBox emailBox = new HBox();
+        emailBox.setAlignment(Pos.CENTER_RIGHT);
+        
+        Label emailLabel = new Label("Email:");
+        emailLabel.setTextFill(Color.AQUA);
+        
+        emailLabel.setFont(Font.font(24));
+        TextField email = new TextField();
+
+        email.setFont(Font.font(16));
+        emailBox.getChildren().addAll(emailLabel, email);
+        
+        pane.add(emailBox, 0, 4, 2, 1);
         email.setAlignment(Pos.BOTTOM_RIGHT);
         
-        //Conformemail label
-        pane.add(new Label("Conform Email"), 0, 2);
-        pane.add(conformemail, 1, 2);
         
+        
+        
+        HBox conformemailBox = new HBox();
+        conformemailBox.setAlignment(Pos.CENTER_RIGHT);
+        
+        Label conformemailLabel = new Label("Confirm Email:");
+        conformemailLabel.setTextFill(Color.AQUA);
+        
+        conformemailLabel.setFont(Font.font(24));
+        TextField conformemail = new TextField();
+
+        conformemail.setFont(Font.font(16));
+        conformemailBox.getChildren().addAll(conformemailLabel, conformemail);
+        
+        pane.add(conformemailBox, 0, 5, 2, 1);
         conformemail.setAlignment(Pos.BOTTOM_RIGHT);
         
-        //Phonenumber label
-        pane.add(new Label("Phone Number"), 0, 3);
-        pane.add(phonenumber, 1, 3);
         
+        
+        
+        
+        HBox phonenumberBox = new HBox();
+        phonenumberBox.setAlignment(Pos.CENTER_RIGHT);
+        
+        Label phonenumberLabel = new Label("Phone Number:");
+        phonenumberLabel.setTextFill(Color.AQUA);
+        
+        phonenumberLabel.setFont(Font.font(24));
+        TextField phonenumber = new TextField();
+
+        phonenumber.setFont(Font.font(16));
+        phonenumberBox.getChildren().addAll(phonenumberLabel, phonenumber);
+        
+        pane.add(phonenumberBox, 0, 6, 2, 1);
         phonenumber.setAlignment(Pos.BOTTOM_RIGHT);
         
-        //password label
-        pane.add(new Label("Set Password"), 0, 4);
-        pane.add(password, 1, 4);
         
+        
+        
+        HBox passwordBox = new HBox();
+        passwordBox.setAlignment(Pos.CENTER_RIGHT);
+        
+        Label passwordLabel = new Label("Password:");
+        passwordLabel.setTextFill(Color.AQUA);
+        
+        passwordLabel.setFont(Font.font(24));
+        PasswordField password = new PasswordField();
+
+        password.setFont(Font.font(16));      
+        passwordBox.getChildren().addAll(passwordLabel, password);
+        
+        pane.add(passwordBox, 0, 7, 2, 1);
         password.setAlignment(Pos.BOTTOM_RIGHT);
         
-        Button sign=new Button("Sign in");
-        pane.add(sign, 1, 5);
-        GridPane.setHalignment(sign, HPos.RIGHT);
         
-        Label mess=new Label("");
-        pane.add(mess, 0, 7);
+
+        // Sign in button
+        Button sign = new Button("Sign in");
+        HBox signBox = new HBox();
         
+        signBox.getChildren().addAll(new Label(""), sign);
+        signBox.setAlignment(Pos.CENTER);
+        
+        pane.add(signBox, 1, 8, 1, 1);
+        sign.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
+
         sign.setOnAction(e -> {
+            
             while (true) {
+                
                 String fullName = fullname.getText();
                 String emailText = email.getText();
+                
                 String conformEmailText = conformemail.getText();
                 String phoneNumberText = phonenumber.getText();
                 String passwordText = password.getText();
@@ -139,116 +386,69 @@ public class User extends Application {
                         throw new Exception("Please fill in all the details.");
                     } 
 
-                    if (!Valid(emailText)) {
+                   else if (!Valid(emailText)) {
                         
                         throw new Exception("Please enter a valid email address.");
                     } 
 
-                    if (!emailText.equals(conformEmailText)) {
+                   else if (!emailText.equals(conformEmailText)) {
                         
                         throw new Exception("The email addresses you entered do not match.");
                     } 
 
-                    if (!fullName.matches("^[a-zA-Z]*$")) {
+                   else if (!fullName.matches("^[a-zA-Z]*$")) {
                         
                         throw new Exception("Please enter a valid name.");
                     } 
 
-                    if (phoneNumberText.length() != 10 || !phoneNumberText.matches("\\d+")) {
+                   else if (phoneNumberText.length() != 10 || !phoneNumberText.matches("\\d+")) {
                         
                         throw new Exception("Please enter a 10-digit phone number.");
                     } 
 
-                    if (passwordText.length() < 5) {
+                   else if (passwordText.length() < 5) {
                         
                         throw new Exception("Password must be at least 5 characters long.");
                     }
 
                     // all input is valid
                     data.saveData(fullName, emailText, phoneNumberText, passwordText);
-                    data.print();
+                    data.print(background,logo,Logo,fullName);
                     
                     return; // exit the method
                 } 
                 
                 catch (Exception ex) {
                     
-                    mess.setText(ex.getMessage());
-                    mess.setTextFill(Color.RED);
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    
+                    alert.setContentText(ex.getMessage());
+                    alert.showAndWait();
                     
                     break; // exit the loop and wait for user input again
                 }
             }
         });
-
-        pane.setAlignment(Pos.CENTER);
-        Scene scene=new Scene(pane,500,500);
+        // create scene and add pane to it
+        Scene scene=new Scene(pane,400,550);
         
         signStage.setScene(scene);
         signStage.show();
         
     }
     
-    public void login() {
-        
-        Stage logStage =new Stage();
-        
-        GridPane layout =new GridPane();
-        
-        TextField emailtextField=new TextField();
-        layout.add(new Label("Email"), 0, 1);
-        
-        layout.add(emailtextField, 1, 1);
-        emailtextField.setAlignment(Pos.BOTTOM_RIGHT);
-        
-        PasswordField passwordtextField=new PasswordField();
-        layout.add(new Label("Password"), 0, 2);
-        
-        layout.add(passwordtextField, 1, 2);
-        passwordtextField.setAlignment(Pos.BOTTOM_RIGHT);
-        
-        Button log=new Button("Log in");
-        
-        layout.add(log, 1, 5);
-        GridPane.setHalignment(log, HPos.RIGHT);
-        
-        log.setOnAction(e -> {
-            
-        String[] userData = data.loadData();
-        
-        if (userData == null || !userData[1].equals(emailtextField.getText())
-                || !userData[3].equals(passwordtextField.getText())) {
-            
-            System.out.println("Wrong details");
-            // Login failed
-            // Show an error message or do something else
-        } 
-        
-        else {
-            
-             System.out.println("Login successful");
-            // Proceed with the rest of the application
-        }
-    });
-        
-        layout.setAlignment(Pos.CENTER);
-        
-        Scene scene=new Scene(layout,500,500);
-        
-        logStage.setScene(scene);
-        logStage.show();
-        
-    }
-    
     public static boolean Valid(String email) {
         
         String regex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z]{2,}$";
-        
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
+    
+    
+
     //main method
     public static void main(String[] args) {
         
