@@ -14,6 +14,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -27,10 +28,8 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -68,8 +67,14 @@ public class Data {
         
         try {
 
+            File file = new File("user_data.txt");
+            if (file.length() == 0) {
+                return null; // return null if file is empty
+            }
+            
             FileReader reader = new FileReader("user_data.txt");
             BufferedReader bufferedReader = new BufferedReader(reader);
+            
             String data = bufferedReader.readLine();
             bufferedReader.close();
             return data.split(",");
@@ -336,6 +341,7 @@ public class Data {
         slider.setShowTickMarks(true);
         
         slider.setSnapToTicks(true);
+        
 
         // Create a layout and add the slider and labels
         
