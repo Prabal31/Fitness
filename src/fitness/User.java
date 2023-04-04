@@ -187,10 +187,26 @@ public class User extends Application {
         
         log.setOnAction(e -> {
 
-                String key=emailTextField.getText();
-                 data.print(key);
+            String[] userData = data.loadData();
+
+            if (userData == null ||!userData[1].equals(emailTextField.getText())
+                    || !userData[3].equals(passwordTextField.getText())) {
+                
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setHeaderText(null);
+
+                alert.setContentText("Wrong email or password! please try again");
+                alert.showAndWait();
+            }
+
+            else {
+
                 // Proceed with the rest of the application
+                data.print(email.getText());
+            }
         });
+                 
+        
         signin.setOnAction(e-> {
             //data.goal();
             //heightweight();
