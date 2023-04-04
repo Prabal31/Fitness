@@ -1,20 +1,12 @@
 package fitness;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.application.Application;
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
@@ -31,14 +23,11 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class User extends Application {
@@ -189,8 +178,7 @@ public class User extends Application {
 
             String[] userData = data.loadData();
 
-            if (userData == null ||!userData[1].equals(emailTextField.getText())
-                    || !userData[3].equals(passwordTextField.getText())) {
+            if (userData == null) {
                 
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setHeaderText(null);
@@ -200,9 +188,9 @@ public class User extends Application {
             }
 
             else {
-
+                String key=emailTextField.getText();
                 // Proceed with the rest of the application
-                data.print(email.getText());
+                data.print(key);
             }
         });
                  

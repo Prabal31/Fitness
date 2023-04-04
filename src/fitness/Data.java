@@ -14,7 +14,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -67,16 +66,10 @@ public class Data {
         
         try {
 
-            File file = new File("user_data.txt");
-            if (file.length() == 0) {
-                return null; // return null if file is empty
-            }
-            
             FileReader reader = new FileReader("user_data.txt");
             BufferedReader bufferedReader = new BufferedReader(reader);
             
             String data = bufferedReader.readLine();
-            bufferedReader.close();
             return data.split(",");
 
         } 
@@ -111,7 +104,6 @@ public class Data {
         Logo.setFitHeight(100);
         
         
-        
         HBox Logobox=new HBox();
         Logobox.getChildren().add(Logo);
         
@@ -120,6 +112,17 @@ public class Data {
         
         Logobox.setAlignment(Pos.CENTER);
         // Create labels for height and weight
+        
+        HBox Bmibox=new HBox();
+        Label bmilabel=new Label("Enter your height and weight");
+        
+        bmilabel.setFont(Font.font(24));
+        Bmibox.setAlignment(Pos.CENTER);
+        
+        bmilabel.setTextFill(Color.AQUA);
+        Bmibox.getChildren().add(bmilabel);
+        
+        gridPane.add(Bmibox, 0, 1,2,1);
         
         Label heightLabel = new Label("Height:");
         Label weightLabel = new Label("Weight:");
@@ -136,12 +139,12 @@ public class Data {
         gridPane.setPadding(new Insets(10));
         
         // Add the labels and text fields to the GridPane
-        gridPane.add(heightLabel, 0, 1);
+        gridPane.add(heightLabel, 0, 2);
         
-        gridPane.add(heightTextField, 1, 1);
+        gridPane.add(heightTextField, 1, 2);
         
-        gridPane.add(weightLabel, 0, 2);
-        gridPane.add(weightTextField, 1, 2);
+        gridPane.add(weightLabel, 0, 3);
+        gridPane.add(weightTextField, 1, 3);
         
        
         
@@ -149,7 +152,7 @@ public class Data {
         Button calculateButton = new Button("Calculate your BMI");
         
         calculateButton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
-        gridPane.add(calculateButton, 0, 3);
+        gridPane.add(calculateButton, 0, 4);
 
         calculateButton.setOnAction(event -> {
             
@@ -442,16 +445,19 @@ public class Data {
         // Add fields to HBox
 
         try {
+            
             BufferedReader reader = new BufferedReader(new FileReader("user_data.txt"));
             String line;
+            boolean matchfound=false;
             while ((line = reader.readLine()) != null) {
+                System.out.println(line);
                 String[] details = line.split(",");
                 String name = details[0];
                 String email = details[1];
                 String phone = details[2];
 
 
-                if (name.contains(key) || email.contains(key) || phone.contains(key)) {
+                if (email.equals(key)) {
                     // display or do something with the person's details
                     // Add labels and text fields to HBox
                     HBox namebox=new HBox();
@@ -499,15 +505,26 @@ public class Data {
                     
                     Label phoneField = new Label(phone);
                     phoneField.setFont(Font.font(20));
-                    phoneField.setTextFill(Color.POWDERBLUE);
                     
+                    phoneField.setTextFill(Color.POWDERBLUE);
                     phonebox.getChildren().addAll(phoneLabel,phoneField);
                     
                     grid.add(phonebox, 0, 3);
                     
-                    
+                    matchfound=true;
+                    break;
                     
                 }
+            }
+            
+            if(!matchfound) {
+                
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+
+                alert.setContentText("Email not found");
+                alert.showAndWait();
+                
             }
             
             reader.close();
@@ -517,6 +534,33 @@ public class Data {
             
             e.printStackTrace();
         }
+        ImageView diet = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\diet.png"));
+        ImageView exercise = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\exercise.png"));
+        
+        diet.setFitWidth(100);
+        diet.setFitHeight(100);
+        
+        exercise.setFitWidth(100);
+        exercise.setFitHeight(100);
+        
+        HBox images=new HBox(30);
+        images.setAlignment(Pos.CENTER);
+        images.getChildren().addAll(diet,exercise);
+        
+        grid.add(images, 0, 4,2,1);
+        
+        HBox buttons=new HBox(70);
+        Button dietbutton=new Button("Diet plan");
+        Button exercisebutton=new Button("Exercise plan");
+        
+        buttons.setAlignment(Pos.CENTER);
+        dietbutton.setStyle("-fx-font-weight: bold; -fx-font-size: 20px;");
+        exercisebutton.setStyle("-fx-font-weight: bold; -fx-font-size: 20px;");
+        buttons.getChildren().addAll(dietbutton,exercisebutton);
+        
+        grid.add(buttons,0,5,2,1);
+        
+        
         Scene scene = new Scene(grid, 400, 550);
         home.setScene(scene);
         
