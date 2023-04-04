@@ -1,8 +1,15 @@
 package fitness;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.application.Application;
@@ -180,25 +187,13 @@ public class User extends Application {
         
         log.setOnAction(e -> {
 
-            String[] userData = data.loadData();
-
-            if (userData == null || !userData[1].equals(emailTextField.getText())
-                    || !userData[3].equals(passwordTextField.getText())) {
-
-                System.out.println("Wrong details");
-                // Login failed
-                // Show an error message or do something else
-            } 
-
-            else {
-
-                 System.out.println("Login successful");
+                String key=emailTextField.getText();
+                 data.print(key);
                 // Proceed with the rest of the application
-            }
         });
-        
         signin.setOnAction(e-> {
             //data.goal();
+            //heightweight();
             signup();
             window.close();
         });
@@ -213,6 +208,7 @@ public class User extends Application {
         
         Stage signStage=new Stage();
         signStage.setTitle("Sign in");
+        
         GridPane pane=new GridPane();
         
         pane.setVgap(15);
@@ -360,7 +356,7 @@ public class User extends Application {
 
         // Sign in button
         HBox buttonBox = new HBox(100);
-        Button sign = new Button("Sign in");
+        Button sign = new Button("Next");
         
         sign.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
         Button back = new Button("Back");
@@ -398,6 +394,7 @@ public class User extends Application {
                         throw new Exception("This Email exists Please log in.");
                         
                     }
+                    
                    else if (!Valid(emailText)) {
                         
                         throw new Exception("Please enter a valid email address.");
@@ -426,10 +423,12 @@ public class User extends Application {
                     // all input is valid
                     data.saveData(fullName, emailText, phoneNumberText, passwordText);
                     //data.print(background,logo,Logo,fullName);
-                    heightweight();
                     
+                    data.heightweight(email);
+                    signStage.close();
                     
                     return; // exit the method
+                    
                 } 
                 
                 catch (Exception ex) {
@@ -486,122 +485,6 @@ public class User extends Application {
 
         return emailExists;
     }
-    
-    public void heightweight() {
-        
-        Stage stage=new Stage();
-        GridPane gridPane = new GridPane();
-        gridPane.setAlignment(Pos.TOP_CENTER);
-        
-        gridPane.setVgap(15);
-        stage.setTitle("Welcome");
-
-        stage.getIcons().add(logo);
-
-        // Set the properties of the image view
-        BackgroundImage view = new BackgroundImage(background,
-        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-        new BackgroundSize(stage.getWidth(), stage.getHeight(), false, false, false, true));
-        gridPane.setBackground(new Background(view));
-        
-        Logo.setFitWidth(100);
-        Logo.setFitHeight(100);
-        
-        
-        
-        HBox Logobox=new HBox();
-        Logobox.getChildren().add(Logo);
-        
-        Logobox.setAlignment(Pos.CENTER);
-        gridPane.add(Logobox, 0, 0,2,1);
-        
-        Logobox.setAlignment(Pos.CENTER);
-        // Create labels for height and weight
-        Label heightLabel = new Label("Height:");
-        Label weightLabel = new Label("Weight:");
-        
-        // Create text fields for entering height and weight
-        TextField heightTextField = new TextField();
-        TextField weightTextField = new TextField();
-        
-        // Create a GridPane to contain the labels and text fields
-        
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
-        gridPane.setPadding(new Insets(10));
-        
-        // Add the labels and text fields to the GridPane
-        gridPane.add(heightLabel, 0, 1);
-        gridPane.add(heightTextField, 1, 1);
-        gridPane.add(weightLabel, 0, 2);
-        gridPane.add(weightTextField, 1, 2);
-        
-       
-        
-        // Create a button to calculate the BMI
-        Button calculateButton = new Button("Calculate your BMI");
-        calculateButton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
-        gridPane.add(calculateButton, 0, 3);
-        
-        String heightText=heightTextField.getText();
-        String weightText=weightTextField.getText();
-        
-        if(heightText == null || weightText.isEmpty()) {
-        
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Please fill in the details");
-            alert.showAndWait();
-        }
-            else {
-                calculateButton.setOnAction(event -> {
-                    double height = Double.parseDouble(heightTextField.getText());
-                    double weight = Double.parseDouble(weightTextField.getText());
-                    double bmi = weight / (height * height);
-
-                    // Create an Alert box to display the BMI
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("BMI Calculator");
-                    alert.setHeaderText("Your BMI is:");
-                    alert.setContentText(String.format("%.2f", bmi));
-                    alert.showAndWait();
-                });
-        }
-        
-        HBox nextbuttonbox =new HBox();
-        Button nextbutton=new Button("Set you goal");
-        
-        nextbuttonbox.setAlignment(Pos.CENTER);
-        nextbuttonbox.getChildren().add(nextbutton);
-        nextbutton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
-        gridPane.add(nextbuttonbox, 0, 4);
-        
-        
-        if(heightText == null || weightText.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Please fill in the details");
-            alert.showAndWait();
-            
-        }
-        else {
-            nextbutton.setOnAction(e-> {
-                data.goal();
-            });
-        }
-        
-
-        
-         // Create a scene with the GridPane as the root node
-        Scene scene = new Scene(gridPane, 400, 550);
-        // Set the stage title and scene, and show the stage
-        stage.setTitle("Height and Weight Input");
-        stage.setScene(scene);
-        stage.show();
-    }
-    
-    
-    
 
     //main method
     public static void main(String[] args) {
