@@ -25,6 +25,7 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -109,11 +110,7 @@ public class DietData {
 
         // Set event handler for the button
         submit.setOnAction(event -> {
-            try {
-                continueAllergy(foodList,key);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(DietData.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                continueAllergy(foodList,key);            
         });
 
         // Create Scene
@@ -124,7 +121,10 @@ public class DietData {
         vegan.show();
     }
 
-    private void continueAllergy(ArrayList<String> foodList,String key) throws FileNotFoundException {
+    public void continueAllergy(ArrayList<String> foodList,String key){
+        
+        Stage cdiet=new Stage();
+        
         System.out.println("Button Clicked");
         System.out.println(foodList);
 
@@ -185,95 +185,111 @@ public class DietData {
                 foodList.remove("Yoghurt");
             }
         }
-        customizeddiet(foodList,key);
-    
-    }
-    public void customizeddiet(ArrayList<String> foodList,String key) {
         
-             // Create GridPane
-            GridPane gridPane = new GridPane();
-            gridPane.setPadding(new Insets(10));
-            gridPane.setHgap(10);
-            gridPane.setVgap(10);
+        
+        
+        // Create GridPane
+        GridPane gridPane = new GridPane();
+        gridPane.setPadding(new Insets(10));
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
 
-            // Create Button
-            Button saveButton = new Button("Save the diet");
-            GridPane.setColumnIndex(saveButton, 1);
-            GridPane.setRowIndex(saveButton, 2);
+        gridPane.setAlignment(Pos.TOP_CENTER);
+         cdiet.getIcons().add(logo);
 
-            // Create TextArea
-            TextArea tempList = new TextArea();
-            tempList.setPrefHeight(326);
-            tempList.setPrefWidth(200);
-            tempList.setStyle("-fx-border-color: black;");
-            GridPane.setColumnIndex(tempList, 0);
-            GridPane.setRowIndex(tempList, 0);
-            GridPane.setRowSpan(tempList, 3);
+         BackgroundImage view = new BackgroundImage(background,
+         BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+         new BackgroundSize(cdiet.getWidth(), cdiet.getHeight(), false, false, false, true));
+         gridPane.setBackground(new Background(view));
 
-            // Create VBox
-            VBox vBox = new VBox(10);
-            GridPane.setColumnIndex(vBox, 1);
-            GridPane.setRowIndex(vBox, 0);
+         Logo.setFitWidth(100);
+         Logo.setFitHeight(100);
 
-            // Create Label and TextField for adding an item
-            Label addItemLabel = new Label("Add an Item to the list");
-            TextField addItemTextField = new TextField();
-            addItemTextField.setPromptText("Add an Item");
-            vBox.getChildren().addAll(addItemLabel, addItemTextField);
+         HBox Logobox=new HBox();
+         Logobox.getChildren().add(Logo);
 
-            // Create Label and TextField for removing an item
-            Label removeItemLabel = new Label("Remove an Item from the list");
-            TextField removeItemTextField = new TextField();
-            removeItemTextField.setPromptText("Remove an Item");
-            vBox.getChildren().addAll(removeItemLabel, removeItemTextField);
+         Logobox.setAlignment(Pos.CENTER);
+         gridPane.add(Logobox, 0, 0,2,1);
 
-            // Add all elements to GridPane
-            gridPane.getChildren().addAll(saveButton, tempList, vBox);
+         Logobox.setAlignment(Pos.CENTER);
 
-            // Set ColumnConstraints
-            ColumnConstraints column1 = new ColumnConstraints();
-            column1.setPercentWidth(50);
-            ColumnConstraints column2 = new ColumnConstraints();
-            column2.setPercentWidth(50);
-            gridPane.getColumnConstraints().addAll(column1, column2);
+         GridPane.setValignment(Logobox, VPos.TOP);
 
-            // Create Scene and set it to primaryStage
-            Scene scene = new Scene(gridPane, 600, 400);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        }
 
-        try { 
-                FileInputStream file = new FileInputStream("user_data.txt");
-                Scanner scan=new Scanner(file);
+         VBox v1 = new VBox(30);
 
-                ArrayList<String> updatedLines = new ArrayList<>();
+         // Create Label and TextField for adding an item
+        Label addItemLabel = new Label("Add an Item to the list");
+        TextField addItemTextField = new TextField();
+        addItemTextField.setPromptText("Add an Item");
 
-                while (scan.hasNextLine()) {
+        v1.getChildren().addAll(addItemLabel,addItemTextField);
 
-                    String line = scan.nextLine();
+        gridPane.add(v1, 0, 1,1,2);
 
-                    String[] parts = line.split(",");
-                    String username = parts[1];
+        VBox v2 = new VBox(30);
 
-                    if(username.equals(key)) {
+        // Create Label and TextField for removing an item
+        Label removeItemLabel = new Label("Remove an Item from the list");
+        TextField removeItemTextField = new TextField();
+        removeItemTextField.setPromptText("Remove an Item");
 
-                        line=line+","+foodList+",";
-                    }
-                    
-                    // Write the updated line back to the fil
-                    updatedLines.add(line);
+        v2.getChildren().addAll(addItemLabel,addItemTextField);
 
+        gridPane.add(v2, 0,2,1,2);
+
+        // Create TextArea
+        TextArea tempList = new TextArea();
+        tempList.setPrefHeight(326);
+        tempList.setPrefWidth(200);
+        tempList.setStyle("-fx-border-color: black;");
+        gridPane.add(tempList,0,0,1,5);
+
+        // Set ColumnConstraints
+        ColumnConstraints column1 = new ColumnConstraints();
+        column1.setPercentWidth(50);
+        ColumnConstraints column2 = new ColumnConstraints();
+        column2.setPercentWidth(50);
+        gridPane.getColumnConstraints().addAll(column1, column2);
+
+        // Create Scene and set it to primaryStage
+
+
+         try { 
+             FileInputStream file = new FileInputStream("user_data.txt");
+             Scanner scan=new Scanner(file);
+
+            ArrayList<String> updatedLines = new ArrayList<>();
+
+            while (scan.hasNextLine()) {
+
+                String line = scan.nextLine();
+
+                String[] parts = line.split(",");
+                String username = parts[1];
+
+                if(username.equals(key)) {
+
+                    line=line+","+foodList+",";
                 }
-                
-                scan.close();
-                Files.write(Paths.get("user_data.txt"), updatedLines);
+
+                // Write the updated line back to the fil
+                updatedLines.add(line);
+
             }
-            catch (IOException e) {
+
+            Files.write(Paths.get("user_data.txt"), updatedLines);
+        }
+        catch (IOException e) {
                     
-                    // Handle the exception here
-                    e.printStackTrace();
+            // Handle the exception here
+            e.printStackTrace();
                     
             }
+        
+        Scene scene = new Scene(gridPane, 400, 550);
+        cdiet.setScene(scene);
+        cdiet.show();
     }
 }
+        
