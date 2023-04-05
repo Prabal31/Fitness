@@ -66,8 +66,8 @@ public class User extends Application {
 
         // Set the properties of the image view
         BackgroundImage view = new BackgroundImage(background,
-                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                new BackgroundSize(window.getWidth(), window.getHeight(), false, false, false, true));
+            BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+            new BackgroundSize(window.getWidth(), window.getHeight(), false, false, false, true));
         layout.setBackground(new Background(view));
 
         Logo.setFitWidth(100);
@@ -175,6 +175,8 @@ public class User extends Application {
                 String key = emailTextField.getText();
                 // Proceed with the rest of the application
                 data.print(key);
+                window.close();
+
             }
         });
 

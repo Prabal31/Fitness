@@ -40,10 +40,11 @@ public class Data {
     
     Image background=new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\background.jpg");
 
-    
     ImageView Logo = new ImageView(logo);
     
     Diet diett=new Diet();
+    
+    boolean matchfound = false;
     
     public void saveData(String name, String email, String phone, String password) {
         
@@ -410,7 +411,10 @@ public class Data {
     
     
     public void print(String key) {
+        
         Stage home = new Stage();
+        
+        
         home.setTitle("Data");
         
         GridPane grid=new GridPane();
@@ -450,7 +454,7 @@ public class Data {
             
             BufferedReader reader = new BufferedReader(new FileReader("user_data.txt"));
             String line;
-            boolean matchfound=false;
+            matchfound=false;
             while ((line = reader.readLine()) != null) {
                 System.out.println(line);
                 String[] details = line.split(",");
@@ -519,15 +523,7 @@ public class Data {
                 }
             }
             
-            if(!matchfound) {
-                
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-
-                alert.setContentText("Email not found");
-                alert.showAndWait();
-                
-            }
+            
             
             reader.close();
         } 
@@ -536,37 +532,51 @@ public class Data {
             
             e.printStackTrace();
         }
-        ImageView diet = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\diet.png"));
-        ImageView exercise = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\exercise.png"));
-        
-        diet.setFitWidth(100);
-        diet.setFitHeight(100);
-        
-        exercise.setFitWidth(100);
-        exercise.setFitHeight(100);
-        
-        HBox images=new HBox(30);
-        images.setAlignment(Pos.CENTER);
-        images.getChildren().addAll(diet,exercise);
-        
-        grid.add(images, 0, 4,2,1);
-        
-        HBox buttons=new HBox(70);
-        Button dietbutton=new Button("Diet plan");
-        Button exercisebutton=new Button("Exercise plan");
-        
-        buttons.setAlignment(Pos.CENTER);
-        dietbutton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
-        exercisebutton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
-        buttons.getChildren().addAll(dietbutton,exercisebutton);
-        
-        grid.add(buttons,0,5,2,1);
-        
-        dietbutton.setOnAction(e-> diett.type(key));
-        
-        Scene scene = new Scene(grid, 400, 550);
-        home.setScene(scene);
-        
-        home.show();
+        if(!matchfound) {
+                
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+
+                alert.setContentText("Email not found");
+                alert.showAndWait();
+                
+        }
+        else {
+            ImageView diet = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\diet.png"));
+            ImageView exercise = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\exercise.png"));
+
+            diet.setFitWidth(100);
+            diet.setFitHeight(100);
+
+            exercise.setFitWidth(100);
+            exercise.setFitHeight(100);
+
+            HBox images=new HBox(30);
+            images.setAlignment(Pos.CENTER);
+            images.getChildren().addAll(diet,exercise);
+
+            grid.add(images, 0, 4,2,1);
+
+            HBox buttons=new HBox(70);
+            Button dietbutton=new Button("Diet plan");
+            Button exercisebutton=new Button("Exercise plan");
+
+            buttons.setAlignment(Pos.CENTER);
+            dietbutton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
+            exercisebutton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
+            buttons.getChildren().addAll(dietbutton,exercisebutton);
+
+            grid.add(buttons,0,5,2,1);
+
+            dietbutton.setOnAction(e-> {
+                diett.type(key);
+                home.close();
+            });
+
+            Scene scene = new Scene(grid, 400, 550);
+            home.setScene(scene);
+
+            home.show();
+        }
     }
 }
