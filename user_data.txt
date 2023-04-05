@@ -1,0 +1,7 @@
+atin,atin@gmail.com,4444433234,atin123,6,140,3.888888888888889,2.0
+jenil,jenil@gmail.com,9876578976,jenil,6,130,3.611111111111111,2.0
+bhavya,bhavya@gmail.com,0987654321,bhavya,7,140,2.857142857142857,2.0
+simran,simran@gmail.com,9876543210,simran,7,140,2.857142857142857,2.0
+prabal,manchanda@gmail.com,9898556666,ptabal,7,140,2.857142857142857,2.0
+ss,ss@gmail.com,1234567890,simran,7,140,2.857142857142857,2.0
+pp,pp@gmail.com,0987654321,ppppp

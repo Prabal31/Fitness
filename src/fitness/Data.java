@@ -43,6 +43,8 @@ public class Data {
     
     ImageView Logo = new ImageView(logo);
     
+    Diet diett=new Diet();
+    
     public void saveData(String name, String email, String phone, String password) {
         
         try {
@@ -554,12 +556,13 @@ public class Data {
         Button exercisebutton=new Button("Exercise plan");
         
         buttons.setAlignment(Pos.CENTER);
-        dietbutton.setStyle("-fx-font-weight: bold; -fx-font-size: 20px;");
-        exercisebutton.setStyle("-fx-font-weight: bold; -fx-font-size: 20px;");
+        dietbutton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
+        exercisebutton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
         buttons.getChildren().addAll(dietbutton,exercisebutton);
         
         grid.add(buttons,0,5,2,1);
         
+        dietbutton.setOnAction(e-> diett.type());
         
         Scene scene = new Scene(grid, 400, 550);
         home.setScene(scene);
