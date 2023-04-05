@@ -121,7 +121,7 @@ public class Data {
         bmilabel.setFont(Font.font(24));
         Bmibox.setAlignment(Pos.CENTER);
         
-        bmilabel.setTextFill(Color.AQUA);
+        bmilabel.setTextFill(Color.ORANGE);
         Bmibox.getChildren().add(bmilabel);
         
         gridPane.add(Bmibox, 0, 1,2,1);
@@ -145,8 +145,8 @@ public class Data {
         
         gridPane.add(heightTextField, 1, 2);
         
-        gridPane.add(weightLabel, 0, 3);
-        gridPane.add(weightTextField, 1, 3);
+        gridPane.add(weightLabel, 0, 4);
+        gridPane.add(weightTextField, 1, 4);
         
        
         
@@ -154,7 +154,7 @@ public class Data {
         Button calculateButton = new Button("Calculate your BMI");
         
         calculateButton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
-        gridPane.add(calculateButton, 0, 4);
+        gridPane.add(calculateButton, 0, 5);
 
         calculateButton.setOnAction(event -> {
             
@@ -230,7 +230,7 @@ public class Data {
         nextbuttonbox.getChildren().add(nextbutton);
         
         nextbutton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
-        gridPane.add(nextbuttonbox, 0, 4);
+        gridPane.add(nextbuttonbox, 0, 6);
         
 
         nextbutton.setOnAction(e-> {
@@ -562,7 +562,7 @@ public class Data {
         
         grid.add(buttons,0,5,2,1);
         
-        dietbutton.setOnAction(e-> diett.type());
+        dietbutton.setOnAction(e-> diett.type(key));
         
         Scene scene = new Scene(grid, 400, 550);
         home.setScene(scene);

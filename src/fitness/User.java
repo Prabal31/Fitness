@@ -181,8 +181,8 @@ public class User extends Application {
         signin.setOnAction(e -> {
             //data.goal();
             //heightweight();
-            //signup();
-            diet.type();
+            signup();
+            //diet.type();
             window.close();
         });
 
