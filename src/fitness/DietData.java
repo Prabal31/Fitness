@@ -1,10 +1,13 @@
 package fitness;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -48,6 +51,7 @@ public class DietData {
     CheckBox fish;
     CheckBox none;
     
+    int c=0;    
     public void vegan(ArrayList<String> foodList,String key) {
         // Create GridPane
         Stage vegan=new Stage();
@@ -288,6 +292,9 @@ public class DietData {
                 else{
                      
                     foodList.add(foodItem);
+                    System.out.println(foodList);
+                    c++;
+                    
                     String newText = "";
                     for (String item : foodList) {
                         
@@ -300,6 +307,7 @@ public class DietData {
             
                 
         });
+        
 
         removeItem.setOnAction(e -> {
             
@@ -335,43 +343,43 @@ public class DietData {
         }
         tempList.setText(text);
 
-        try { 
-            FileInputStream file = new FileInputStream("user_data.txt");
-            Scanner scan=new Scanner(file);
-
-           ArrayList<String> updatedLines = new ArrayList<>();
-
-           while (scan.hasNextLine()) {
-
-               String line = scan.nextLine();
-                              
-               String[] parts = line.split(",");
-               String username = parts[1];
-
-               if(username.equals(key)) {
-                   
-                   for (String item : foodList) {
-                       
-                        line=line+","+item;
-                   }
-               }
-
-               // Write the updated line back to the fil
-               updatedLines.add(line);
-
-           }
-
-           Files.write(Paths.get("user_data.txt"), updatedLines);
-       }
-       catch (IOException e) {
-
-           // Handle the exception here
-           e.printStackTrace();
-
-        }
-        
         saveButton.setOnAction(e-> {
-            homediet(key);
+            try { 
+                FileInputStream file = new FileInputStream("user_data.txt");
+                Scanner scan=new Scanner(file);
+
+                ArrayList<String> updatedLines = new ArrayList<>();
+
+                while (scan.hasNextLine()) {
+
+                    String line = scan.nextLine();
+
+                    String[] parts = line.split(",");
+                    String username = parts[1];
+
+                    if(username.equals(key)) {
+
+                        for (String item : foodList) {
+
+                             line=line+","+item;
+                        }
+                    }
+                    line=line+","+c;
+
+                    // Write the updated line back to the fil
+                    updatedLines.add(line);
+
+                }
+
+               Files.write(Paths.get("user_data.txt"), updatedLines);
+           }
+            catch (IOException ex) {
+
+                // Handle the exception here
+                ex.printStackTrace();
+
+             }
+            homediet(key,c);
         });
         
 
@@ -380,7 +388,7 @@ public class DietData {
        vegandiet.show();
     }
     
-    public void  homediet(String key) {
+    public void  homediet(String key,int c) {
         
         Stage home=new Stage();
         // Create three TextAreas
@@ -426,21 +434,82 @@ public class DietData {
         TextArea textArea1 = new TextArea();
         TextArea textArea2 = new TextArea();
         TextArea textArea3 = new TextArea();
-        textareabox.getChildren().addAll(textArea1,textArea2,textArea3);
+        TextArea textArea4 = new TextArea();
+
+        textareabox.getChildren().addAll(textArea1,textArea2,textArea3,textArea4);
         grid.add(textareabox, 0, 4,2,1);
         // Create three Buttons
         Label breakfast = new Label("Breakfast");
         Label lunch = new Label("Lunch");
         Label dinner = new Label("Dinner");
+        Label other = new Label("Other Items");
+        breakfast.setFont(Font.font(14));
+        lunch.setFont(Font.font(14));
+        dinner.setFont(Font.font(14));
+        other.setFont(Font.font(14));
+
+
 
         // Create an HBox to hold the Buttons
-        HBox buttonBox = new HBox(80);
-        buttonBox.setPadding(new Insets(10));
+        HBox buttonBox = new HBox(40);
         buttonBox.setAlignment(Pos.CENTER);
-        buttonBox.getChildren().addAll(breakfast, lunch, dinner);
+        buttonBox.getChildren().addAll(breakfast, lunch, dinner,other);
 
         grid.add(buttonBox, 0, 6,2,1);
 
+        ArrayList<String> lines = new ArrayList<>();
+        try {
+            File file = new File("user_data.txt");
+            Scanner scanner = new Scanner(file);
+            int lineNum = 1;
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] parts = line.split(",");
+                String username=parts[1];
+                if(key.equals(username)) {
+                    for(String item:parts) {
+                        lines.add(item);
+                    }
+                } 
+            }
+        }
+        catch (IOException e) {
+
+            // Handle the exception here
+            e.printStackTrace();
+
+         } 
+         ArrayList<String> data=new ArrayList<>();
+         List<String> specificData = lines.subList(8, lines.size());
+         System.out.println(specificData);
+         
+        ArrayList<String> last = new ArrayList<>(specificData.subList(specificData.size() - c-1, specificData.size()));
+
+         
+        for (String item : specificData) {
+           if (item.equals("Lentils") || item.equals("Quinoa") || item.equals("Barley") ||
+               item.equals("Leafy Greens") || item.equals("Kidney Beans")) {
+
+               textArea1.appendText(item+"\n");
+           } else if (item.equals("Apples") || item.equals("Banana") || item.equals("Almond Milk") ||
+                      item.equals("Oat Milk") || item.equals("Chia Seeds")) {
+               textArea2.appendText(item+"\n");
+           } else if (item.equals("Black Beans")) {
+               textArea3.appendText(item+"\n");
+           }
+       }
+        for (int i = 0; i < last.size(); i++) {
+            try {
+                int num = Integer.parseInt(last.get(i));
+                // The value at index i is a valid integer, do something with it...
+            } 
+            catch (NumberFormatException e) {
+                // The value at index i is not a valid integer, do something else...
+                textArea4.appendText(last.get(i) + "\n");
+    }
+}
+         
+        
         // Set up the scene and show the stage
         Scene scene = new Scene(grid, 400, 550);
         home.setScene(scene);
