@@ -27,6 +27,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -107,7 +108,25 @@ public class DietData {
         gridPane.getChildren().addAll(label, peanuts, treeNuts, wheat, eggs, milk, soy, fish, none, submit);
 
         // Set event handler for the button
-         if(soy.isSelected()){
+         
+        
+        submit.setOnAction(event -> {
+            
+                continueAllergy(foodList,key); 
+                vegan.close();
+        });
+
+        // Create Scene
+        Scene scene = new Scene(gridPane, 400, 550);
+
+        // Set Scene to Stage
+        vegan.setScene(scene);
+        vegan.show();
+    }
+
+    public void continueAllergy(ArrayList<String> foodList,String key){
+        
+        if(soy.isSelected()){
             if(foodList.contains("Tofu")){
                 foodList.remove("Tofu");
             }
@@ -124,29 +143,36 @@ public class DietData {
             if(foodList.contains("Almonds")){
                 foodList.remove("Almonds");
             }
+            
             if(foodList.contains("Cashews")){
                 foodList.remove("Cashews");
             }
+            
             if(foodList.contains("Pistachios")){
                 foodList.remove("Pistachios");
             }
+            
             if(foodList.contains("Almond Milk")){
                 foodList.remove("Almond Milk");
             }
         }
         if(wheat.isSelected()){
+            
             if(foodList.contains("Tortilla")){
                 foodList.remove("Tortilla");
             }
+            
             if(foodList.contains("Whole Oats")){
                 foodList.remove("Whole Oats");
             }
+            
             if(foodList.contains("Oat Milk")){
                 foodList.remove("Oat Milk");
             }
         }
 
         if(eggs.isSelected()){
+            
             if(foodList.contains("Omellette")){
                 foodList.remove("Omellette");
                 foodList.remove("Eggs");
@@ -156,28 +182,15 @@ public class DietData {
         }
 
         if(milk.isSelected()){
+            
             if(foodList.contains("Milk")){
                 foodList.remove("Milk");
             }
+            
             if(foodList.contains("Yoghurt")){
                 foodList.remove("Yoghurt");
             }
         }
-        submit.setOnAction(event -> {
-                continueAllergy(foodList,key); 
-                vegan.close();
-        });
-
-        // Create Scene
-        Scene scene = new Scene(gridPane, 400, 550);
-
-        // Set Scene to Stage
-        vegan.setScene(scene);
-        vegan.show();
-    }
-
-    public void continueAllergy(ArrayList<String> foodList,String key){
-        
         Stage vegandiet=new Stage();
         GridPane gridPane = new GridPane();
         gridPane.setPadding(new Insets(10));
@@ -202,7 +215,7 @@ public class DietData {
         
         GridPane.setValignment(Logobox, VPos.TOP);
 
-        Label label = new Label("Do you have any allergies?");
+        Label label = new Label("Do you want add or remove any item?");
         label.setFont(new Font("Candara Italic", 18.0));
         gridPane.add(label, 0, 1, 2, 1); // column, row, colspan, rowspan
 
@@ -227,16 +240,16 @@ public class DietData {
         GridPane.setRowIndex(vBox, 3);
 
         // Create Label and TextField for adding an item
-        Button addItemLabel = new Button("Add an Item to the list");
+        Button addItem = new Button("Add an Item to the list");
         TextField addItemTextField = new TextField();
         addItemTextField.setPromptText("Add an Item");
-        vBox.getChildren().addAll(addItemTextField,addItemLabel);
+        vBox.getChildren().addAll(addItemTextField,addItem);
 
         // Create Label and TextField for removing an item
-        Button removeItemLabel = new Button("Remove an Item from the list");
+        Button removeItem = new Button("Remove an Item from the list");
         TextField removeItemTextField = new TextField();
         removeItemTextField.setPromptText("Remove an Item");
-        vBox.getChildren().addAll( removeItemTextField,removeItemLabel);
+        vBox.getChildren().addAll( removeItemTextField,removeItem);
 
         // Add all elements to GridPane
         gridPane.getChildren().addAll(saveButton, tempList, vBox);
@@ -250,63 +263,77 @@ public class DietData {
         
         gridPane.getColumnConstraints().addAll(column1, column2);
         
+        
+        addItem.setOnAction(e -> {
+            
+            String foodItem = addItemTextField.getText();
+            if (foodItem.isEmpty()) {
+                
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setContentText("Please enter the item name");
+                alert.showAndWait();
+                
+            }
+            
+            else {
+                 if(foodList.contains(foodItem)){
+                     
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setContentText("Item already exist");
+                    alert.showAndWait();
+                }
+                 
+                else{
+                     
+                    foodList.add(foodItem);
+                    String newText = "";
+                    for (String item : foodList) {
+                        
+                        newText += "\u2022 " + item + "\n";
+                    }
+                    tempList.setText(newText);
+                    addItemTextField.clear();
+                }
+            }
+            
+                
+        });
+
+        removeItem.setOnAction(e -> {
+            
+            String foodItem = removeItemTextField.getText();
+            if (foodItem.isEmpty()) {
+                
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setContentText("Please enter the item name");
+                alert.showAndWait();
+            } 
+            
+            else {
+                
+                if (foodList.contains(foodItem)) {
+                    
+                    foodList.remove(foodItem);
+                    String newText = "";
+                    for (String item : foodList) {
+                        
+                        newText += "\u2022 " + item + "\n";
+                    }
+                    tempList.setText(newText);
+                    removeItemTextField.clear();
+                }
+            }
+        });
+        
         String text = "";
         for (String item : foodList) {
             
             text += "\u2022 " + item + "\n"; // using bullet point unicode character
         }
-
-        // Set text to TextArea
         tempList.setText(text);
-        
-        
-        addItemLabel.setOnAction(e-> {
-            if(addItemTextField==null) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-
-                alert.setContentText("Please enter the data");
-                alert.showAndWait();
-            }
-            else {
-
-                String foodItem=addItemTextField.getText();
-                
-                if(foodList.contains(foodItem)){
-                    
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setHeaderText(null);
-
-                    alert.setContentText("Food already exist");
-                    alert.showAndWait();
-                }
-                else{
-                    
-                    foodList.add(foodItem);
-
-                }
-            }
-        });
-        removeItemLabel.setOnAction(e-> {
-            
-            if(removeItemTextField==null) {
-
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-
-                alert.setContentText("Please enter the data");
-                alert.showAndWait();
-            }
-            else {
-
-                String foodItem=removeItemTextField.getText();
-                
-               if(foodList.contains(foodItem)){
-                   
-               }
-                    foodList.remove(foodItem);  
-            }
-        });
 
         try { 
             FileInputStream file = new FileInputStream("user_data.txt");
@@ -317,13 +344,16 @@ public class DietData {
            while (scan.hasNextLine()) {
 
                String line = scan.nextLine();
-
+                              
                String[] parts = line.split(",");
                String username = parts[1];
 
                if(username.equals(key)) {
-
-                   line=line+","+foodList+",";
+                   
+                   for (String item : foodList) {
+                       
+                        line=line+","+item;
+                   }
                }
 
                // Write the updated line back to the fil
@@ -340,16 +370,81 @@ public class DietData {
 
         }
         
-        for (String item : foodList) {
-            
-            text += "\u2022 " + item + "\n"; // using bullet point unicode character
-        }
-        tempList.setText(text);
-
+        saveButton.setOnAction(e-> {
+            homediet(key);
+        });
+        
 
        Scene scene = new Scene(gridPane, 400, 550);
        vegandiet.setScene(scene);
        vegandiet.show();
+    }
+    
+    public void  homediet(String key) {
+        
+        Stage home=new Stage();
+        // Create three TextAreas
+        // Create a GridPane to hold the TextAreas and the ButtonBox
+        GridPane grid = new GridPane();
+        grid.setPadding(new Insets(10));
+        grid.setHgap(10);
+        grid.setVgap(10);
+        
+        grid.setAlignment(Pos.TOP_CENTER);
+        home.getIcons().add(logo);
+        
+        BackgroundImage view = new BackgroundImage(background,
+        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+        new BackgroundSize(home.getWidth(), home.getHeight(), false, false, false, true));
+        grid.setBackground(new Background(view));
+        
+        Logo.setFitWidth(100);
+        Logo.setFitHeight(100);
+        
+        HBox Logobox=new HBox();
+        Logobox.getChildren().add(Logo);
+        
+        Logobox.setAlignment(Pos.CENTER);
+        grid.add(Logobox, 0, 0,2,1);
+        
+        Logobox.setAlignment(Pos.CENTER);
+        
+        GridPane.setValignment(Logobox, VPos.TOP);
+        
+        HBox goalbox = new HBox();
+        Label dietpaln = new Label("Your Diet plan");
+
+        dietpaln.setFont(Font.font(24));
+        goalbox.setAlignment(Pos.CENTER);
+
+        dietpaln.setTextFill(Color.DIMGREY);
+        goalbox.getChildren().add(dietpaln);
+
+        grid.add(goalbox, 0,2, 2, 1);
+        
+        HBox textareabox=new HBox();
+        TextArea textArea1 = new TextArea();
+        TextArea textArea2 = new TextArea();
+        TextArea textArea3 = new TextArea();
+        textareabox.getChildren().addAll(textArea1,textArea2,textArea3);
+        grid.add(textareabox, 0, 4,2,1);
+        // Create three Buttons
+        Label breakfast = new Label("Breakfast");
+        Label lunch = new Label("Lunch");
+        Label dinner = new Label("Dinner");
+
+        // Create an HBox to hold the Buttons
+        HBox buttonBox = new HBox(80);
+        buttonBox.setPadding(new Insets(10));
+        buttonBox.setAlignment(Pos.CENTER);
+        buttonBox.getChildren().addAll(breakfast, lunch, dinner);
+
+        grid.add(buttonBox, 0, 6,2,1);
+
+        // Set up the scene and show the stage
+        Scene scene = new Scene(grid, 400, 550);
+        home.setScene(scene);
+        home.show();
     }
 }
 
