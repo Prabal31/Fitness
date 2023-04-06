@@ -18,6 +18,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -47,7 +48,8 @@ public class Exercise {
     Image background=new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\background.jpg");
     
     ImageView Logo = new ImageView(logo);
-    ArrayList<String> addlevel=new ArrayList<>();
+    
+    ArrayList<String> exercises=new ArrayList<>();
     
     public void level(String key) {
         Stage level =new Stage();
@@ -96,8 +98,8 @@ public class Exercise {
             if (normalCheckBox.isSelected()) {
                 intermediateCheckBox.setSelected(false);
                 advancedCheckBox.setSelected(false);
-                addlevel.clear();
-                addlevel.add("Normal");
+                exercises.clear();
+                exercises.add("Normal");
             }
         });
 
@@ -105,8 +107,8 @@ public class Exercise {
             if (intermediateCheckBox.isSelected()) {
                 normalCheckBox.setSelected(false);
                 advancedCheckBox.setSelected(false);
-                addlevel.clear();
-                addlevel.add("Intermediate");
+                exercises.clear();
+                exercises.add("Intermediate");
             }
         });
 
@@ -114,8 +116,9 @@ public class Exercise {
             if (advancedCheckBox.isSelected()) {
                 normalCheckBox.setSelected(false);
                 intermediateCheckBox.setSelected(false);
-                addlevel.clear();
-                addlevel.add("Advanced");
+                exercises.clear();
+                exercises.add("Advanced");
+                
             }
         });
 
@@ -138,12 +141,13 @@ public class Exercise {
                 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
-                alert.setContentText("Please enter the item name");
+                alert.setContentText("Please select one");
                 alert.showAndWait();            
             } 
             else {
-                pushup(key,addlevel);
-                //level.close();
+                pushup();
+                System.out.println(exercises);
+                level.close();
             }
         });
         
@@ -154,8 +158,9 @@ public class Exercise {
         level.show();
     
     }
-    public void pushup(String key,ArrayList<String> addpushup) {
+    public void pushup() {
         
+        System.out.println("yes");
         Stage pushup =new Stage();
         GridPane grid = new GridPane();
         
@@ -203,8 +208,8 @@ public class Exercise {
             if (pushup5.isSelected()) {
                 pushup10.setSelected(false);
                 pushup20.setSelected(false);
-                addpushup.clear();
-                addpushup.add("Lsee than 5 pushups");
+                //exercises.remove(exercises.size() - 1);
+                exercises.add("Less than 5 pushups");
             }
         });
 
@@ -212,8 +217,8 @@ public class Exercise {
             if (pushup10.isSelected()) {
                 pushup5.setSelected(false);
                 pushup20.setSelected(false);
-                addpushup.clear();
-                addpushup.add("5 to 10 pushups");
+                //exercises.remove(exercises.size() - 1);
+                exercises.add("5 to 10 pushups");
             }
         });
 
@@ -221,8 +226,8 @@ public class Exercise {
             if (pushup20.isSelected()) {
                 pushup5.setSelected(false);
                 pushup10.setSelected(false);
-                addpushup.clear();
-                addpushup.add("10 to 20 pushups");
+                //exercises.remove(exercises.size() - 1);
+                exercises.add("10 to 20 pushups");
             }
         });
 
@@ -245,15 +250,282 @@ public class Exercise {
 
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setHeaderText(null);
-                    alert.setContentText("Please enter the item name");
+                    alert.setContentText("Please select one");
                     alert.showAndWait();            
                 } 
                 else {
-                    
+                    squads();
+                    System.out.println(exercises);
+                    pushup.close();
                 }
             });
+        Scene scene = new Scene(grid, 400, 550);
+        pushup.setScene(scene);
+        pushup.show();
     }
+    
+    public void squads() {
+        
+        Stage squads =new Stage();
+        GridPane grid = new GridPane();
+        
+        grid.setPadding(new Insets(10));
+        grid.setVgap(10);
+        grid.setHgap(10);
+        
+        grid.setAlignment(Pos.TOP_CENTER);
+        squads.getIcons().add(logo);
+        
+        BackgroundImage view = new BackgroundImage(background,
+        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+        new BackgroundSize(squads.getWidth(), squads.getHeight(), false, false, false, true));
+        grid.setBackground(new Background(view));
+        
+        Logo.setFitWidth(100);
+        Logo.setFitHeight(100);
+        
+        HBox Logobox=new HBox();
+        Logobox.getChildren().add(Logo);
+        
+        Logobox.setAlignment(Pos.CENTER);
+        grid.add(Logobox, 0, 0,2,1);
+        
+        Logobox.setAlignment(Pos.CENTER);
+        
+        GridPane.setValignment(Logobox, VPos.TOP);
+        
+        HBox goalbox = new HBox();
+        Label setyourgoallabel = new Label("How many squads can you do?");
+
+        setyourgoallabel.setFont(Font.font(24));
+        goalbox.setAlignment(Pos.CENTER);
+
+        setyourgoallabel.setTextFill(Color.DIMGREY);
+        goalbox.getChildren().add(setyourgoallabel);
+
+        grid.add(goalbox, 0,2, 2, 1);
+
+        CheckBox squads10 = new CheckBox("Lsee than 10");
+        CheckBox squads20 = new CheckBox("10 to 20 squads");
+        CheckBox squads30 = new CheckBox("20 to 30 squads");
+        
+         squads10.setOnAction(e -> {
+            if (squads10.isSelected()) {
+                squads20.setSelected(false);
+                squads30.setSelected(false);
+                //exercises.remove(exercises.size() - 1);
+                exercises.add("Lsee than 10");
+            }
+        });
+
+        squads20.setOnAction(e -> {
+            if (squads20.isSelected()) {
+                squads10.setSelected(false);
+                squads30.setSelected(false);
+                //exercises.remove(exercises.size() - 1);
+                exercises.add("10 to 20 squads");
+            }
+        });
+
+        squads30.setOnAction(e -> {
+            if (squads30.isSelected()) {
+                squads10.setSelected(false);
+                squads20.setSelected(false);
+                //exercises.remove(exercises.size() - 1);
+                exercises.add("20 to 30 squads");
+            }
+        });
+
+        VBox vBox = new VBox(10, squads10, squads20, squads30);
+        
+        
+        grid.add(vBox, 0, 4,2,1);
+        
+        HBox buttons=new HBox(70);
+        Button pushupbutton=new Button("Next");
+
+        buttons.setAlignment(Pos.CENTER);
+        pushupbutton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
+        buttons.getChildren().addAll(pushupbutton);
+
+        grid.add(buttons,0,5,2,1);
+        
+        pushupbutton.setOnAction(e-> {
+            if (!squads10.isSelected() && !squads20.isSelected() && !squads30.isSelected()) {
+
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setContentText("Please select one");
+                    alert.showAndWait();            
+                } 
+                else {
+                    jumping();
+                }
+            });
+        Scene scene = new Scene(grid, 400, 550);
+        squads.setScene(scene);
+        squads.show();
+    }
+    
+     public void jumping() {
+        
+        Stage jump =new Stage();
+        GridPane grid = new GridPane();
+        
+        grid.setPadding(new Insets(10));
+        grid.setVgap(10);
+        grid.setHgap(10);
+        
+        grid.setAlignment(Pos.TOP_CENTER);
+        jump.getIcons().add(logo);
+        
+        BackgroundImage view = new BackgroundImage(background,
+        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+        new BackgroundSize(jump.getWidth(), jump.getHeight(), false, false, false, true));
+        grid.setBackground(new Background(view));
+        
+        Logo.setFitWidth(100);
+        Logo.setFitHeight(100);
+        
+        HBox Logobox=new HBox();
+        Logobox.getChildren().add(Logo);
+        
+        Logobox.setAlignment(Pos.CENTER);
+        grid.add(Logobox, 0, 0,2,1);
+        
+        Logobox.setAlignment(Pos.CENTER);
+        
+        GridPane.setValignment(Logobox, VPos.TOP);
+        
+        HBox goalbox = new HBox();
+        Label setyourgoallabel = new Label("How many squads can you do?");
+
+        setyourgoallabel.setFont(Font.font(24));
+        goalbox.setAlignment(Pos.CENTER);
+
+        setyourgoallabel.setTextFill(Color.DIMGREY);
+        goalbox.getChildren().add(setyourgoallabel);
+
+        grid.add(goalbox, 0,2, 2, 1);
+
+        CheckBox jump30 = new CheckBox("For 30 seconds");
+        CheckBox jump50 = new CheckBox("For 50 seconds");
+        CheckBox jump60 = new CheckBox("For 60 seconds");
+        
+         jump30.setOnAction(e -> {
+            if (jump30.isSelected()) {
+                jump50.setSelected(false);
+                jump60.setSelected(false);
+                exercises.clear();
+                exercises.add("For 30 seconds");
+            }
+        });
+
+        jump50.setOnAction(e -> {
+            if (jump50.isSelected()) {
+                jump30.setSelected(false);
+                jump60.setSelected(false);
+                exercises.clear();
+                exercises.add("For 50 seconds");
+            }
+        });
+
+        jump60.setOnAction(e -> {
+            if (jump50.isSelected()) {
+                jump30.setSelected(false);
+                jump50.setSelected(false);
+                exercises.clear();
+                exercises.add("For 60 seconds");
+            }
+        });
+
+        VBox vBox = new VBox(10, jump30, jump50, jump60);
+        
+        
+        grid.add(vBox, 0, 4,2,1);
+        
+        HBox buttons=new HBox(70);
+        Button pushupbutton=new Button("Next");
+
+        buttons.setAlignment(Pos.CENTER);
+        pushupbutton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
+        buttons.getChildren().addAll(pushupbutton);
+
+        grid.add(buttons,0,5,2,1);
+        
+        pushupbutton.setOnAction(e-> {
+            if (!jump30.isSelected() && !jump50.isSelected() && !jump60.isSelected()) {
+
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setContentText("Please select one");
+                    alert.showAndWait();            
+                } 
+                else {
+                    Break();
+                }
+            });
+        Scene scene = new Scene(grid, 400, 550);
+        jump.setScene(scene);
+        jump.show();
+    }
+    
+     public void Break() {
+         Stage sliderbreak=new Stage();
+        // Create a GridPane layout with some padding
+        GridPane grid = new GridPane();
+        grid.setPadding(new Insets(10));
+        grid.setVgap(10);
+        grid.setHgap(10);
+        
+        grid.setAlignment(Pos.TOP_CENTER);
+        sliderbreak.getIcons().add(logo);
+        
+        BackgroundImage view = new BackgroundImage(background,
+        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+        new BackgroundSize(sliderbreak.getWidth(), sliderbreak.getHeight(), false, false, false, true));
+        grid.setBackground(new Background(view));
+        
+        Logo.setFitWidth(100);
+        Logo.setFitHeight(100);
+        
+        HBox Logobox=new HBox();
+        Logobox.getChildren().add(Logo);
+        
+        Logobox.setAlignment(Pos.CENTER);
+        grid.add(Logobox, 0, 0,2,1);
+        
+        Logobox.setAlignment(Pos.CENTER);
+        
+        GridPane.setValignment(Logobox, VPos.TOP);
+        
+        HBox goalbox = new HBox();
+        Label setyourgoallabel = new Label("Choose your break time?");
+
+        setyourgoallabel.setFont(Font.font(24));
+        goalbox.setAlignment(Pos.CENTER);
+
+        setyourgoallabel.setTextFill(Color.DIMGREY);
+        goalbox.getChildren().add(setyourgoallabel);
+
+        grid.add(goalbox, 0,2, 2, 1);
+        // Create a Slider with options of 10, 20, and 30 seconds
+        Slider slider = new Slider(10, 30, 10);
+        slider.setMinorTickCount(0);
+        slider.setMajorTickUnit(10);
+        slider.setSnapToTicks(true);
+        slider.setShowTickLabels(true);
+        slider.setShowTickMarks(true);
+        grid.add(slider, 0, 3,2,1);
+        Scene scene = new Scene(grid, 400, 550);
+        sliderbreak.setScene(scene);
+        sliderbreak.show();
+    }
+    
 }
+
+
+
 
 
    

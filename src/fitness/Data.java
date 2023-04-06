@@ -43,6 +43,9 @@ public class Data {
     ImageView Logo = new ImageView(logo);
     
     Diet diett=new Diet();
+    DietData data=new DietData();
+    
+    Exercise exercisee=new Exercise();
     
     boolean matchfound = false;
     
@@ -571,6 +574,188 @@ public class Data {
             dietbutton.setOnAction(e-> {
                 diett.type(key);
                 home.close();
+            });
+            
+            exercisebutton.setOnAction(e-> {
+                exercisee.level(key);
+                home.close();
+
+            });
+
+            Scene scene = new Scene(grid, 400, 550);
+            home.setScene(scene);
+
+            home.show();
+        }
+    }
+    
+    public void printcheck(String key,int c) {
+        
+        Stage home = new Stage();
+        
+        
+        home.setTitle("Data");
+        
+        GridPane grid=new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20));
+        
+        grid.setAlignment(Pos.TOP_CENTER);
+        
+        home.getIcons().add(logo);
+
+        // Set the properties of the image view
+        BackgroundImage view = new BackgroundImage(background,
+        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+        new BackgroundSize(home.getWidth(), home.getHeight(), false, false, false, true));
+        grid.setBackground(new Background(view));
+        
+        Logo.setFitWidth(100);
+        Logo.setFitHeight(100);
+        
+        
+        
+        HBox Logobox=new HBox();
+        Logobox.getChildren().add(Logo);
+        
+        Logobox.setAlignment(Pos.CENTER);
+        grid.add(Logobox, 0, 0,2,1);
+        
+        GridPane.setValignment(Logobox, VPos.TOP);
+        
+        Label heading = new Label("Details");
+        heading.setAlignment(Pos.CENTER);
+        heading.setStyle("-fx-font-weight: bold; -fx-font-size: 20px;");
+        // Add fields to HBox
+
+        try {
+            
+            BufferedReader reader = new BufferedReader(new FileReader("user_data.txt"));
+            String line;
+            matchfound=false;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+                String[] details = line.split(",");
+                String name = details[0];
+                String email = details[1];
+                String phone = details[2];
+
+
+                if (email.equals(key)) {
+                    // display or do something with the person's details
+                    // Add labels and text fields to HBox
+                    HBox namebox=new HBox();
+                    
+                    Label nameLabel = new Label("Name:");
+                    nameLabel.setFont(Font.font(25));
+                    
+                    nameLabel.setTextFill(Color.AQUA);
+                    nameLabel.setAlignment(Pos.CENTER_RIGHT);
+                    
+                    Label nameField = new Label(name);
+                    nameField.setFont(Font.font(20));
+                    nameField.setTextFill(Color.POWDERBLUE);
+                    namebox.getChildren().addAll(nameLabel,nameField);
+                    
+                    grid.add(namebox, 0, 1);
+                    
+                    
+                    
+                    HBox emailbox=new HBox();
+                    
+                    Label emailLabel = new Label("Email:");
+                    emailLabel.setFont(Font.font(25));
+                    
+                    emailLabel.setTextFill(Color.AQUA);
+                    emailLabel.setAlignment(Pos.CENTER_RIGHT);
+                    
+                    Label emailField = new Label(email);
+                    emailField.setFont(Font.font(20));
+                    emailField.setTextFill(Color.POWDERBLUE);
+                    
+                    emailbox.getChildren().addAll(emailLabel,emailField);
+                    
+                    grid.add(emailbox, 0, 2);
+                    
+                    
+                    
+                    HBox phonebox=new HBox();
+                    
+                    Label phoneLabel = new Label("Phone:");
+                    phoneLabel.setFont(Font.font(25));
+                    
+                    phoneLabel.setTextFill(Color.AQUA);
+                    phoneLabel.setAlignment(Pos.CENTER_RIGHT);
+                    
+                    Label phoneField = new Label(phone);
+                    phoneField.setFont(Font.font(20));
+                    
+                    phoneField.setTextFill(Color.POWDERBLUE);
+                    phonebox.getChildren().addAll(phoneLabel,phoneField);
+                    
+                    grid.add(phonebox, 0, 3);
+                    
+                    matchfound=true;
+                    break;
+                    
+                }
+            }
+            
+            
+            
+            reader.close();
+        } 
+        
+        catch (IOException e) {
+            
+            e.printStackTrace();
+        }
+        if(!matchfound) {
+                
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+
+                alert.setContentText("Email not found");
+                alert.showAndWait();
+                
+        }
+        else {
+            ImageView diet = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\diet.png"));
+            ImageView exercise = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\exercise.png"));
+
+            diet.setFitWidth(100);
+            diet.setFitHeight(100);
+
+            exercise.setFitWidth(100);
+            exercise.setFitHeight(100);
+
+            HBox images=new HBox(30);
+            images.setAlignment(Pos.CENTER);
+            images.getChildren().addAll(diet,exercise);
+
+            grid.add(images, 0, 4,2,1);
+
+            HBox buttons=new HBox(70);
+            Button dietbutton=new Button("Diet plan");
+            Button exercisebutton=new Button("Exercise plan");
+
+            buttons.setAlignment(Pos.CENTER);
+            dietbutton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
+            exercisebutton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
+            buttons.getChildren().addAll(dietbutton,exercisebutton);
+
+            grid.add(buttons,0,5,2,1);
+
+            dietbutton.setOnAction(e-> {
+                data.homediet(key,c);
+                home.close();
+            });
+            
+            exercisebutton.setOnAction(e-> {
+                exercisee.level(key);
+                home.close();
+
             });
 
             Scene scene = new Scene(grid, 400, 550);

@@ -1,8 +1,13 @@
 package fitness;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.application.Application;
@@ -52,6 +57,18 @@ public class User extends Application {
 
     ImageView Logo = new ImageView(logo);
     Diet diet=new Diet();
+    
+    DietData d=new DietData();
+    
+    ArrayList<String> addedlist=new ArrayList<>();
+    int c=0;
+
+    public User(ArrayList<String> addedlist) {
+        this.addedlist=addedlist;
+    }
+
+    public User() {
+    }
 
     @Override
     public void start(Stage window) {
@@ -173,8 +190,38 @@ public class User extends Application {
                 alert.showAndWait();
             } else {
                 String key = emailTextField.getText();
+                String last;
+                
+                
+                try { 
+                FileInputStream file = new FileInputStream("user_data.txt");
+                Scanner scan=new Scanner(file);
+
+                ArrayList<String> updatedLines = new ArrayList<>();
+                String l;
+                while (scan.hasNextLine()) {
+
+                    l = scan.nextLine();
+
+                    String[] parts = l.split(",");
+                    String username = parts[1];
+
+                    if(username.equals(key)) {
+                        
+                        c=Integer.parseInt(parts[parts.length-1]);
+                    }
+
+                }
+           }
+            catch (IOException ex) {
+
+                // Handle the exception here
+                ex.printStackTrace();
+
+             }
+                
                 // Proceed with the rest of the application
-                data.print(key);
+                data.printcheck(key,c);
                 window.close();
 
             }
@@ -184,6 +231,7 @@ public class User extends Application {
             //data.goal();
             //heightweight();
             signup();
+            //d.homediet();
             //diet.type();
             window.close();
         });
