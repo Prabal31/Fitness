@@ -23,10 +23,9 @@ public class Diet {
     
     Aalert alert=new Aalert();
 
+    Image logo = new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\logo.jpg");
 
-    Image logo = new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\logo.jpg");
-
-    Image background = new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\background.jpg");
+    Image background = new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\background.jpg");
 
     ImageView Logo = new ImageView(logo);
 

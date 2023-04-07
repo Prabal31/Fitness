@@ -28,9 +28,9 @@ import javafx.stage.Stage;
 
 public class ExerciseData {
     
-    Image logo = new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\logo.jpg");
+    Image logo = new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\logo.jpg");
     
-    Image background=new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\background.jpg");
+    Image background=new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\background.jpg");
     
     ImageView Logo = new ImageView(logo);
     
@@ -90,7 +90,6 @@ public class ExerciseData {
         int indexstart=lines.indexOf("ExerciseplanStart");
         int indexend=lines.indexOf("ExerciseplanEnd");
         List<String> specificData = lines.subList(indexstart+1, indexend-1);
-        System.out.println(specificData);
         String levelvalue=specificData.get(0);
         String pushupvalue=specificData.get(1);
         String squadsvalue=specificData.get(2);
@@ -123,12 +122,12 @@ public class ExerciseData {
             sv=25;
         }
 
-        ImageView mountain = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\moutane.png"));
-        ImageView squads = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\squads.png"));
-        ImageView pushup = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\pushup.png"));
+        ImageView mountain = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\moutane.png"));
+        ImageView squads = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\squads.png"));
+        ImageView pushup = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\pushup.png"));
         
-        ImageView jump = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\jump.png"));
-        ImageView strech = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\strech.png"));
+        ImageView jump = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\jump.png"));
+        ImageView strech = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\strech.png"));
         
         mountain.setFitWidth(70);
         mountain.setFitHeight(70);

@@ -49,9 +49,9 @@ public class User extends Application {
 
     Data data = new Data();
 
-    Image logo = new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\logo.jpg");
+    Image logo = new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\logo.jpg");
 
-    Image background = new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\background.jpg");
+    Image background = new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\background.jpg");
 
     ImageView Logo = new ImageView(logo);
     Diet diet=new Diet();
@@ -111,7 +111,7 @@ public class User extends Application {
         HBox welcomebox = new HBox();
         Label welcome = new Label("Welcome Back!");
 
-        welcome.setTextFill(Color.WHITE);
+        welcome.setTextFill(Color.BLACK);
         welcome.setFont(Font.font(24));
 
         welcomebox.setAlignment(Pos.CENTER);
@@ -123,7 +123,7 @@ public class User extends Application {
         emailBox.setAlignment(Pos.CENTER_RIGHT);
         Label emailLabel = new Label("Email");
 
-        emailLabel.setTextFill(Color.AQUA);
+        emailLabel.setTextFill(Color.WHITE);
         emailLabel.setFont(Font.font(24));
 
         TextField emailTextField = new TextField();
@@ -131,12 +131,12 @@ public class User extends Application {
 
         emailBox.getChildren().addAll(emailLabel, emailTextField);
         layout.add(emailBox, 0, 3, 2, 1);
-        emailTextField.setAlignment(Pos.BOTTOM_RIGHT);
+        emailTextField.setAlignment(Pos.BOTTOM_LEFT);
 
         HBox passwordBox = new HBox();
         passwordBox.setAlignment(Pos.CENTER_RIGHT);
         Label passwordLabel = new Label("Password");
-        passwordLabel.setTextFill(Color.AQUA);
+        passwordLabel.setTextFill(Color.WHITE);
 
         passwordLabel.setFont(Font.font(24));
         PasswordField passwordTextField = new PasswordField();
@@ -145,7 +145,7 @@ public class User extends Application {
         passwordBox.getChildren().addAll(passwordLabel, passwordTextField);
 
         layout.add(passwordBox, 0, 4, 2, 1);
-        passwordTextField.setAlignment(Pos.BOTTOM_RIGHT);
+        passwordTextField.setAlignment(Pos.BOTTOM_LEFT);
 
         Button log = new Button("Log in");
         log.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
@@ -162,12 +162,12 @@ public class User extends Application {
         layout.add(line, 0, 7, 2, 1);
 
         HBox newuserbox = new HBox();
-        Label newuserLabel = new Label("New to Activity Fitness?");
+        Label newuserLabel = new Label("New to Fitness?");
 
         newuserLabel.setFont(Font.font(24));
         newuserbox.setAlignment(Pos.CENTER);
 
-        newuserLabel.setTextFill(Color.AQUA);
+        newuserLabel.setTextFill(Color.BLACK);
         newuserbox.getChildren().add(newuserLabel);
 
         layout.add(newuserbox, 0, 8, 2, 1);
@@ -192,11 +192,10 @@ public class User extends Application {
                 
                 // Proceed with the rest of the application
                 data.printcheck(key);
-                window.close();
 
             }
         });
-
+        window.close();
         signin.setOnAction(e -> {
             //data.goal();
             //heightweight();

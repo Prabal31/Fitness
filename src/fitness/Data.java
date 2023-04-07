@@ -39,13 +39,14 @@ public class Data {
     Aalert alert=new Aalert();
 
     
-    Image logo = new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\logo.jpg");
+    Image logo = new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\logo.jpg");
     
-    Image background=new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\background.jpg");
+    Image background=new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\background.jpg");
 
     ImageView Logo = new ImageView(logo);
     
     Diet diett=new Diet();
+    
     DietData data=new DietData();
     
     Exercise exercisee=new Exercise();
@@ -316,9 +317,9 @@ public class Data {
         
         pane.add(goalbox, 0, 1,2,1);
         
-        ImageView startImage = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\1.png"));
-        ImageView midImage = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\2.png"));
-        ImageView endImage = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\3.png"));
+        ImageView startImage = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\1.png"));
+        ImageView midImage = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\2.png"));
+        ImageView endImage = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\3.png"));
         
         startImage.setFitWidth(100);
         startImage.setFitHeight(100);
@@ -462,7 +463,6 @@ public class Data {
             String line;
             matchfound=false;
             while ((line = reader.readLine()) != null) {
-                System.out.println(line);
                 String[] details = line.split(",");
                 String name = details[0];
                 String email = details[1];

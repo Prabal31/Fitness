@@ -54,9 +54,9 @@ public class Exercise {
     
     ExerciseData exercisedata=new ExerciseData();
     
-    Image logo = new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\logo.jpg");
+    Image logo = new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\logo.jpg");
     
-    Image background=new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\background.jpg");
+    Image background=new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\background.jpg");
     
     ImageView Logo = new ImageView(logo);
     
@@ -154,7 +154,6 @@ public class Exercise {
             } 
             else {
                 pushup(key);
-                System.out.println(exercises);
                 level.close();
             }
         });
@@ -168,7 +167,6 @@ public class Exercise {
     }
     public void pushup(String key) {
         
-        System.out.println("yes");
         Stage pushup =new Stage();
         GridPane grid = new GridPane();
         
@@ -259,7 +257,6 @@ public class Exercise {
                     alert.alertbox("Please select one");                } 
                 else {
                     squads(key);
-                    System.out.println(exercises);
                     pushup.close();
                 }
             });
@@ -421,17 +418,13 @@ public class Exercise {
         buttonbox.setAlignment(Pos.CENTER);
         buttonbox.getChildren().add(submit);
         grid.add(buttonbox, 0, 9,2,1);
-        
-        System.out.println(exercises);
-        
+                
         comboBox.setOnAction(e-> {
             
             Integer selectedValue = comboBox.getValue();
             exercises.add(Integer.toString(selectedValue));
                   
         });
-        System.out.println(exercises);
-
         
         
 
