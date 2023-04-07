@@ -102,7 +102,7 @@ public class Data {
         gridPane.setAlignment(Pos.TOP_CENTER);
         
         gridPane.setVgap(15);
-        stage.setTitle("Welcome");
+        stage.setTitle("BMI Calculator");
 
         stage.getIcons().add(logo);
 
@@ -131,13 +131,20 @@ public class Data {
         bmilabel.setFont(Font.font(24));
         Bmibox.setAlignment(Pos.CENTER);
         
-        bmilabel.setTextFill(Color.ORANGE);
+        bmilabel.setTextFill(Color.BLACK);
         Bmibox.getChildren().add(bmilabel);
         
         gridPane.add(Bmibox, 0, 1,2,1);
         
         Label heightLabel = new Label("Height:");
+        heightLabel.setTextFill(Color.WHITE);
+        heightLabel.setFont(Font.font(18));
+
         Label weightLabel = new Label("Weight:");
+        weightLabel.setTextFill(Color.WHITE);
+        weightLabel.setFont(Font.font(18));
+
+
         
         // Create text fields for entering height and weight
         TextField heightTextField = new TextField();
@@ -164,7 +171,7 @@ public class Data {
         Button calculateButton = new Button("Calculate your BMI");
         
         calculateButton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
-        gridPane.add(calculateButton, 0, 5);
+        gridPane.add(calculateButton, 0, 6);
 
         calculateButton.setOnAction(event -> {
             
@@ -240,7 +247,7 @@ public class Data {
         nextbuttonbox.getChildren().add(nextbutton);
         
         nextbutton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
-        gridPane.add(nextbuttonbox, 0, 6);
+        gridPane.add(nextbuttonbox, 0, 8);
         
 
         nextbutton.setOnAction(e-> {
@@ -275,6 +282,8 @@ public class Data {
     
     public void goal(TextField email) {
         Stage goal =new Stage();
+        
+        goal.setTitle("Set your goal");
         
         GridPane pane = new GridPane();
         pane.setHgap(10);
@@ -312,7 +321,7 @@ public class Data {
         setyourgoallabel.setFont(Font.font(24));
         goalbox.setAlignment(Pos.CENTER);
         
-        setyourgoallabel.setTextFill(Color.AQUA);
+        setyourgoallabel.setTextFill(Color.BLACK);
         goalbox.getChildren().add(setyourgoallabel);
         
         pane.add(goalbox, 0, 1,2,1);
@@ -422,7 +431,7 @@ public class Data {
         Stage home = new Stage();
         
         
-        home.setTitle("Data");
+        home.setTitle("Your Details");
         
         GridPane grid=new GridPane();
         grid.setHgap(10);
@@ -461,7 +470,6 @@ public class Data {
             
             BufferedReader reader = new BufferedReader(new FileReader("user_data.txt"));
             String line;
-            matchfound=false;
             while ((line = reader.readLine()) != null) {
                 String[] details = line.split(",");
                 String name = details[0];
@@ -477,12 +485,12 @@ public class Data {
                     Label nameLabel = new Label("Name:");
                     nameLabel.setFont(Font.font(25));
                     
-                    nameLabel.setTextFill(Color.AQUA);
+                    nameLabel.setTextFill(Color.WHITE);
                     nameLabel.setAlignment(Pos.CENTER_RIGHT);
                     
                     Label nameField = new Label(name);
                     nameField.setFont(Font.font(20));
-                    nameField.setTextFill(Color.POWDERBLUE);
+                    nameField.setTextFill(Color.BLACK);
                     namebox.getChildren().addAll(nameLabel,nameField);
                     
                     grid.add(namebox, 0, 1);
@@ -494,12 +502,12 @@ public class Data {
                     Label emailLabel = new Label("Email:");
                     emailLabel.setFont(Font.font(25));
                     
-                    emailLabel.setTextFill(Color.AQUA);
+                    emailLabel.setTextFill(Color.WHITE);
                     emailLabel.setAlignment(Pos.CENTER_RIGHT);
                     
                     Label emailField = new Label(email);
                     emailField.setFont(Font.font(20));
-                    emailField.setTextFill(Color.POWDERBLUE);
+                    emailField.setTextFill(Color.BLACK);
                     
                     emailbox.getChildren().addAll(emailLabel,emailField);
                     
@@ -512,25 +520,22 @@ public class Data {
                     Label phoneLabel = new Label("Phone:");
                     phoneLabel.setFont(Font.font(25));
                     
-                    phoneLabel.setTextFill(Color.AQUA);
+                    phoneLabel.setTextFill(Color.WHITE);
                     phoneLabel.setAlignment(Pos.CENTER_RIGHT);
                     
                     Label phoneField = new Label(phone);
                     phoneField.setFont(Font.font(20));
                     
-                    phoneField.setTextFill(Color.POWDERBLUE);
+                    phoneField.setTextFill(Color.BLACK);
                     phonebox.getChildren().addAll(phoneLabel,phoneField);
                     
                     grid.add(phonebox, 0, 3);
                     
-                    matchfound=true;
                     break;
                     
                 }
             }
-            
-            
-            
+
             reader.close();
         } 
         
@@ -538,53 +543,60 @@ public class Data {
             
             e.printStackTrace();
         }
-        if(!matchfound) {
-                
-                alert.alertbox("Email not found");                
-        }
-        else {
-            ImageView diet = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\diet.png"));
-            ImageView exercise = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\exercise.png"));
-
-            diet.setFitWidth(100);
-            diet.setFitHeight(100);
-
-            exercise.setFitWidth(100);
-            exercise.setFitHeight(100);
-
-            HBox images=new HBox(30);
-            images.setAlignment(Pos.CENTER);
-            images.getChildren().addAll(diet,exercise);
-
-            grid.add(images, 0, 4,2,1);
-
-            HBox buttons=new HBox(70);
-            Button dietbutton=new Button("Diet plan");
-            Button exercisebutton=new Button("Exercise plan");
-
-            buttons.setAlignment(Pos.CENTER);
-            dietbutton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
-            exercisebutton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
-            buttons.getChildren().addAll(dietbutton,exercisebutton);
-
-            grid.add(buttons,0,5,2,1);
-
-            dietbutton.setOnAction(e-> {
-                diett.type(key);
-                home.close();
-            });
             
-            exercisebutton.setOnAction(e-> {
-                exercisee.level(key);
-                home.close();
+        HBox head=new HBox();
+        Label headlabel=new Label("Select your plan");
+        
+        headlabel.setFont(Font.font(25));                    
+        headlabel.setTextFill(Color.BLACK);
+        
+        head.setAlignment(Pos.CENTER);
+        head.getChildren().add(headlabel);
+        
+        grid.add(head, 0, 4,2,1);
 
-            });
 
-            Scene scene = new Scene(grid, 400, 550);
-            home.setScene(scene);
+        ImageView diet = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\diet.png"));
+        ImageView exercise = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\exercise.png"));
 
-            home.show();
-        }
+        diet.setFitWidth(100);
+        diet.setFitHeight(100);
+
+        exercise.setFitWidth(100);
+        exercise.setFitHeight(100);
+
+        HBox images=new HBox(30);
+        images.setAlignment(Pos.CENTER);
+        images.getChildren().addAll(diet,exercise);
+
+        grid.add(images, 0, 5,2,1);
+
+        HBox buttons=new HBox(65);
+        Button dietbutton=new Button("Diet plan");
+        Button exercisebutton=new Button("Exercise plan");
+
+        buttons.setAlignment(Pos.CENTER);
+        dietbutton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
+        exercisebutton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
+        buttons.getChildren().addAll(dietbutton,exercisebutton);
+
+        grid.add(buttons,0,6,2,1);
+
+        dietbutton.setOnAction(e-> {
+            diett.type(key);
+            home.close();
+        });
+
+        exercisebutton.setOnAction(e-> {
+            exercisee.level(key);
+            home.close();
+
+        });
+
+        Scene scene = new Scene(grid, 400, 550);
+        home.setScene(scene);
+
+        home.show();
     }
     
     public void printcheck(String key) {
@@ -592,7 +604,7 @@ public class Data {
         Stage home = new Stage();
         
         
-        home.setTitle("Data");
+        home.setTitle("Your details");
         
         GridPane grid=new GridPane();
         grid.setHgap(10);
@@ -648,12 +660,12 @@ public class Data {
                     Label nameLabel = new Label("Name:");
                     nameLabel.setFont(Font.font(25));
                     
-                    nameLabel.setTextFill(Color.AQUA);
+                    nameLabel.setTextFill(Color.WHITE);
                     nameLabel.setAlignment(Pos.CENTER_RIGHT);
                     
                     Label nameField = new Label(name);
                     nameField.setFont(Font.font(20));
-                    nameField.setTextFill(Color.POWDERBLUE);
+                    nameField.setTextFill(Color.BLACK);
                     namebox.getChildren().addAll(nameLabel,nameField);
                     
                     grid.add(namebox, 0, 1);
@@ -665,12 +677,12 @@ public class Data {
                     Label emailLabel = new Label("Email:");
                     emailLabel.setFont(Font.font(25));
                     
-                    emailLabel.setTextFill(Color.AQUA);
+                    emailLabel.setTextFill(Color.WHITE);
                     emailLabel.setAlignment(Pos.CENTER_RIGHT);
                     
                     Label emailField = new Label(email);
                     emailField.setFont(Font.font(20));
-                    emailField.setTextFill(Color.POWDERBLUE);
+                    emailField.setTextFill(Color.BLACK);
                     
                     emailbox.getChildren().addAll(emailLabel,emailField);
                     
@@ -683,13 +695,13 @@ public class Data {
                     Label phoneLabel = new Label("Phone:");
                     phoneLabel.setFont(Font.font(25));
                     
-                    phoneLabel.setTextFill(Color.AQUA);
+                    phoneLabel.setTextFill(Color.WHITE);
                     phoneLabel.setAlignment(Pos.CENTER_RIGHT);
                     
                     Label phoneField = new Label(phone);
                     phoneField.setFont(Font.font(20));
                     
-                    phoneField.setTextFill(Color.POWDERBLUE);
+                    phoneField.setTextFill(Color.BLACK);
                     phonebox.getChildren().addAll(phoneLabel,phoneField);
                     
                     grid.add(phonebox, 0, 3);
@@ -714,8 +726,20 @@ public class Data {
                 alert.alertbox("Email not found");                
         }
         else {
-            ImageView diet = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\diet.png"));
-            ImageView exercise = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\exercise.png"));
+            
+            HBox head=new HBox();
+            Label headlabel=new Label("YOUR PLANS");
+
+            headlabel.setFont(Font.font(25));                    
+            headlabel.setTextFill(Color.BLACK);
+
+            head.setAlignment(Pos.CENTER);
+            head.getChildren().add(headlabel);
+
+            grid.add(head, 0, 4,2,1);
+            
+            ImageView diet = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\diet.png"));
+            ImageView exercise = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\exercise.png"));
 
             diet.setFitWidth(100);
             diet.setFitHeight(100);
@@ -727,7 +751,7 @@ public class Data {
             images.setAlignment(Pos.CENTER);
             images.getChildren().addAll(diet,exercise);
 
-            grid.add(images, 0, 4,2,1);
+            grid.add(images, 0, 5,2,1);
 
             HBox buttons=new HBox(70);
             Button dietbutton=new Button("Diet plan");
@@ -738,7 +762,7 @@ public class Data {
             exercisebutton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
             buttons.getChildren().addAll(dietbutton,exercisebutton);
 
-            grid.add(buttons,0,5,2,1);
+            grid.add(buttons,0,6,2,1);
 
             ArrayList<String> lines = new ArrayList<>();
             try {

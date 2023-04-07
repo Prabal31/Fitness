@@ -1,6 +1,7 @@
 package fitness;
 
 import java.util.ArrayList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
@@ -62,19 +63,19 @@ public class Diet {
         GridPane.setValignment(Logobox, VPos.TOP);
 
         HBox goalbox = new HBox();
-        Label setyourgoallabel = new Label("Select your plan");
+        Label setyourgoallabel = new Label("Choose your diet type");
 
         setyourgoallabel.setFont(Font.font(24));
         goalbox.setAlignment(Pos.CENTER);
 
-        setyourgoallabel.setTextFill(Color.AQUA);
+        setyourgoallabel.setTextFill(Color.BLACK);
         goalbox.getChildren().add(setyourgoallabel);
 
         root.add(goalbox, 0, 3, 2, 1);
 
-        ImageView veganimage = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\vegan.png"));
-        ImageView vegimage = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\veg.png"));
-        ImageView nonvegimage = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\non-veg.png"));
+        ImageView veganimage = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\vegan.png"));
+        ImageView vegimage = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\veg.png"));
+        ImageView nonvegimage = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\non-veg.png"));
 
         veganimage.setFitWidth(100);
         veganimage.setFitHeight(100);
@@ -119,8 +120,8 @@ public class Diet {
             openVegan(key,type);
             
         });
-        vegetarianButton.setOnAction(e -> openVegetarian());
-        nonVegetarianButton.setOnAction(e -> openNonVegetarian());
+        vegetarianButton.setOnAction(e -> openother());
+        nonVegetarianButton.setOnAction(e -> openother());
 
         Scene scene = new Scene(root, 400, 550);
         type.setScene(scene);
@@ -146,12 +147,52 @@ public class Diet {
         type.close();
     }
 
-    private void openVegetarian() {
+    private void openother() {
         // handle opening vegetarian menu
-    }
+        
+        Stage home = new Stage();
+        
+        
+        home.setTitle("Your details");
+        
+        GridPane grid=new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20));
+        
+        grid.setAlignment(Pos.TOP_CENTER);
+        
+        home.getIcons().add(logo);
 
-    private void openNonVegetarian() {
-        // handle opening non-vegetarian menu
+        // Set the properties of the image view
+        BackgroundImage view = new BackgroundImage(background,
+        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+        new BackgroundSize(home.getWidth(), home.getHeight(), false, false, false, true));
+        grid.setBackground(new Background(view));
+        
+        Logo.setFitWidth(100);
+        Logo.setFitHeight(100);
+        
+        
+        
+        HBox Logobox=new HBox();
+        Logobox.getChildren().add(Logo);
+        
+        Logobox.setAlignment(Pos.CENTER);
+        grid.add(Logobox, 0, 0,2,1);
+        
+        GridPane.setValignment(Logobox, VPos.TOP);
+        
+        Label heading = new Label("Not Implemented yet");
+        heading.setAlignment(Pos.CENTER);
+        heading.setStyle("-fx-font-weight: bold; -fx-font-size: 20px;");
+        // Add fields to HBox
+        grid.add(heading, 0, 10,2,1);
+        
+        Scene scene=new Scene(grid,400,550);
+        home.setScene(scene);
+        home.show();
+        
     }
 
 }

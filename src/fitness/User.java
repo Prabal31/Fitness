@@ -1,11 +1,9 @@
 package fitness;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.application.Application;
@@ -54,11 +52,7 @@ public class User extends Application {
     Image background = new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\background.jpg");
 
     ImageView Logo = new ImageView(logo);
-    Diet diet=new Diet();
-    
-    DietData d=new DietData();
-    ExerciseData exercise =new ExerciseData();
-    
+        
     ArrayList<String> addedlist=new ArrayList<>();
     int c=0;
     String key;
@@ -239,6 +233,9 @@ public class User extends Application {
 
         HBox headingbox = new HBox();
         Label tracker = new Label("My Fitness Tracker");
+        
+        tracker.setTextFill(Color.BLACK);
+
 
         tracker.setFont(Font.font(35));
         headingbox.setAlignment(Pos.TOP_CENTER);
@@ -251,7 +248,7 @@ public class User extends Application {
 
         HBox welcomebox = new HBox();
         Label welcome = new Label("Fill in the details!");
-        welcome.setTextFill(Color.WHITE);
+        welcome.setTextFill(Color.BLACK);
 
         welcome.setFont(Font.font(24));
         welcomebox.setAlignment(Pos.CENTER);
@@ -264,7 +261,7 @@ public class User extends Application {
         fullnameBox.setAlignment(Pos.CENTER_RIGHT);
 
         Label fullnameLabel = new Label("Full name:");
-        fullnameLabel.setTextFill(Color.AQUA);
+        fullnameLabel.setTextFill(Color.WHITE);
 
         fullnameLabel.setFont(Font.font(24));
         fullname = new TextField();
@@ -273,14 +270,14 @@ public class User extends Application {
         fullnameBox.getChildren().addAll(fullnameLabel, fullname);
 
         pane.add(fullnameBox, 0, 3, 2, 1);
-        fullname.setAlignment(Pos.BOTTOM_RIGHT);
+        fullname.setAlignment(Pos.BOTTOM_LEFT);
 
         //Email name field
         HBox emailBox = new HBox();
         emailBox.setAlignment(Pos.CENTER_RIGHT);
 
         Label emailLabel = new Label("Email:");
-        emailLabel.setTextFill(Color.AQUA);
+        emailLabel.setTextFill(Color.WHITE);
 
         emailLabel.setFont(Font.font(24));
         email = new TextField();
@@ -289,13 +286,13 @@ public class User extends Application {
         emailBox.getChildren().addAll(emailLabel, email);
 
         pane.add(emailBox, 0, 4, 2, 1);
-        email.setAlignment(Pos.BOTTOM_RIGHT);
+        email.setAlignment(Pos.BOTTOM_LEFT);
 
         HBox conformemailBox = new HBox();
         conformemailBox.setAlignment(Pos.CENTER_RIGHT);
 
         Label conformemailLabel = new Label("Confirm Email:");
-        conformemailLabel.setTextFill(Color.AQUA);
+        conformemailLabel.setTextFill(Color.WHITE);
 
         conformemailLabel.setFont(Font.font(24));
         conformemail = new TextField();
@@ -304,13 +301,13 @@ public class User extends Application {
         conformemailBox.getChildren().addAll(conformemailLabel, conformemail);
 
         pane.add(conformemailBox, 0, 5, 2, 1);
-        conformemail.setAlignment(Pos.BOTTOM_RIGHT);
+        conformemail.setAlignment(Pos.BOTTOM_LEFT);
 
         HBox phonenumberBox = new HBox();
         phonenumberBox.setAlignment(Pos.CENTER_RIGHT);
 
         Label phonenumberLabel = new Label("Phone Number:");
-        phonenumberLabel.setTextFill(Color.AQUA);
+        phonenumberLabel.setTextFill(Color.WHITE);
 
         phonenumberLabel.setFont(Font.font(24));
         phonenumber = new TextField();
@@ -319,13 +316,13 @@ public class User extends Application {
         phonenumberBox.getChildren().addAll(phonenumberLabel, phonenumber);
 
         pane.add(phonenumberBox, 0, 6, 2, 1);
-        phonenumber.setAlignment(Pos.BOTTOM_RIGHT);
+        phonenumber.setAlignment(Pos.BOTTOM_LEFT);
 
         HBox passwordBox = new HBox();
         passwordBox.setAlignment(Pos.CENTER_RIGHT);
 
         Label passwordLabel = new Label("Password:");
-        passwordLabel.setTextFill(Color.AQUA);
+        passwordLabel.setTextFill(Color.WHITE);
 
         passwordLabel.setFont(Font.font(24));
         password = new PasswordField();
@@ -334,7 +331,7 @@ public class User extends Application {
         passwordBox.getChildren().addAll(passwordLabel, password);
 
         pane.add(passwordBox, 0, 7, 2, 1);
-        password.setAlignment(Pos.BOTTOM_RIGHT);
+        password.setAlignment(Pos.BOTTOM_LEFT);
 
         // Sign in button
         HBox buttonBox = new HBox(100);
@@ -436,7 +433,7 @@ public class User extends Application {
 
             while ((line = reader.readLine()) != null) {
 
-                if (line.contains(email)) {
+                if (line.equals(email)) {
 
                     emailExists = true;
                     break;

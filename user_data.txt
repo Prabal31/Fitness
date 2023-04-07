@@ -1,4 +1,16 @@
-Prabh,prabh@gmail.com,1234567890,prabh@gmail.com,7,120,2.4489795918367347,2.0,ExerciseplanStart,Advanced,10 to 20 pushups,20 to 30 squads,20,ExerciseplanEnd,,1,DietplanEnd,ExerciseplanEnd,,ExerciseplanEnd,
-atin,atin@gmail.com,1234567890,atin@gmail.com,6,120,3.3333333333333335,2.0,DietplanStart,Lentils,Quinoa,Barley,Leafy Greens,Kidney Beans,Apples,Banana,Almond Milk,Oat Milk,Chia Seeds,Black Beans,orange,1,DietplanEnd,ExerciseplanStart,Advanced,10 to 20 pushups,20 to 30 squads,20,ExerciseplanEnd,,ExerciseplanEnd,
-lol,lol@gmail.com,1234567890,lol@gmail.com,6,120,3.3333333333333335,2.0,ExerciseplanEnd,
-roop,roop@gmail.com,1234567890,roop@gmail.com,6,120,3.3333333333333335,2.0,ExerciseplanStart,Advanced,5 to 10 pushups,20 to 30 squads,20,ExerciseplanEnd,
+prabh,prabh@gmail.com,6473357870,prabh@gmail.com,0,DietplanEnd
+atin,atin@gmail.com,1234567898,atin@gmail.com,0,DietplanEnd
+roop,roop@gmail.com,1234567890,roop@gmail.com,0,DietplanEnd
+atin,aatin@gmail.com,1234567890,atin@gmail.com,0,DietplanEnd
+ak,ak@gmail.com,1234567890,ak@gmail.com,7,140,2.857142857142857,2.0,7,120,2.4489795918367347,2.0,0,DietplanEnd
+LOL,lol@gmail.com,1234567890,lol@gmail.com,8,100,1.5625,2.0,0,DietplanEnd
+l,l0@gmail.com,1234567890,l@gmail.com,0,DietplanEnd
+l,lo@gmail.com,1234567890,lo@gmail.com,0,DietplanEnd
+lol,llol@gmail.com,1234567890,lol@gmail.com,7,120,2.4489795918367347,2.0,0,DietplanEnd
+GG,g@gmail.com,1234567890,g@gmail.com,8,126,1.96875,2.0,7,120,2.4489795918367347,2.0,0,DietplanEnd
+h,hh@gmail.com,1234567890,h@gmail.com,7,10,0.20408163265306123,2.0,0,DietplanEnd
+r,r@gmail.com,1234567890,r@gmail.com,7,120,2.4489795918367347,2.0,0,DietplanEnd
+p,p@gmail.com,1234567870,p@gmail.com,8,120,1.875,2.0,0,DietplanEnd
+a,ak@gmail.com,1234567890,ak@gmail.com,7,120,2.4489795918367347,2.0,0,DietplanEnd
+g,g@gmail.com,1234567890,g@gmail.com,7,120,2.4489795918367347,2.0,0,DietplanEnd
+e,e@gmail.com,1234567890,e@gmail.com,7,120,2.4489795918367347,2.0,DietplanStart,Tofu,Lentils,Quinoa,Barley,Leafy Greens,Kidney Beans,Apples,Banana,Almond Milk,Oat Milk,Chia Seeds,Black Beans,0,DietplanEnd

@@ -507,9 +507,16 @@ public class DietData {
             catch (NumberFormatException e) {
                 // The value at index i is not a valid integer, do something else...
                 textArea4.appendText(last.get(i) + "\n");
+            }
         }
-    }
-         
+        
+        HBox button=new HBox();
+        Button homeButton=new Button("Home");
+        homeButton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
+        button.getChildren().add(homeButton);
+        homeButton.setAlignment(Pos.CENTER);
+        
+        grid.add(button,0,10,2,1);
         
         // Set up the scene and show the stage
         Scene scene = new Scene(grid, 400, 550);
