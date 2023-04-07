@@ -1,9 +1,14 @@
 package fitness;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicReference;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -37,11 +42,17 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import static javafx.scene.text.Font.font;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 public class Exercise {
+    
+
+    Aalert alert=new Aalert();
+    
+    ExerciseData exercisedata=new ExerciseData();
     
     Image logo = new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\logo.jpg");
     
@@ -139,13 +150,10 @@ public class Exercise {
         levelbutton.setOnAction(e-> {
             if (!normalCheckBox.isSelected() && !intermediateCheckBox.isSelected() && !advancedCheckBox.isSelected()) {
                 
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setContentText("Please select one");
-                alert.showAndWait();            
+                alert.alertbox("Please select one");
             } 
             else {
-                pushup();
+                pushup(key);
                 System.out.println(exercises);
                 level.close();
             }
@@ -158,7 +166,7 @@ public class Exercise {
         level.show();
     
     }
-    public void pushup() {
+    public void pushup(String key) {
         
         System.out.println("yes");
         Stage pushup =new Stage();
@@ -200,7 +208,7 @@ public class Exercise {
 
         grid.add(goalbox, 0,2, 2, 1);
 
-        CheckBox pushup5 = new CheckBox("Lsee than 5 pushups");
+        CheckBox pushup5 = new CheckBox("Less than 5 pushups");
         CheckBox pushup10 = new CheckBox("5 to 10 pushups");
         CheckBox pushup20 = new CheckBox("10 to 20 pushups");
         
@@ -248,13 +256,9 @@ public class Exercise {
         pushupbutton.setOnAction(e-> {
             if (!pushup5.isSelected() && !pushup10.isSelected() && !pushup20.isSelected()) {
 
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setHeaderText(null);
-                    alert.setContentText("Please select one");
-                    alert.showAndWait();            
-                } 
+                    alert.alertbox("Please select one");                } 
                 else {
-                    squads();
+                    squads(key);
                     System.out.println(exercises);
                     pushup.close();
                 }
@@ -264,7 +268,7 @@ public class Exercise {
         pushup.show();
     }
     
-    public void squads() {
+    public void squads(String key) {
         
         Stage squads =new Stage();
         GridPane grid = new GridPane();
@@ -305,7 +309,7 @@ public class Exercise {
 
         grid.add(goalbox, 0,2, 2, 1);
 
-        CheckBox squads10 = new CheckBox("Lsee than 10");
+        CheckBox squads10 = new CheckBox("Less than 10");
         CheckBox squads20 = new CheckBox("10 to 20 squads");
         CheckBox squads30 = new CheckBox("20 to 30 squads");
         
@@ -314,7 +318,7 @@ public class Exercise {
                 squads20.setSelected(false);
                 squads30.setSelected(false);
                 //exercises.remove(exercises.size() - 1);
-                exercises.add("Lsee than 10");
+                exercises.add("Less than 10");
             }
         });
 
@@ -353,125 +357,20 @@ public class Exercise {
         pushupbutton.setOnAction(e-> {
             if (!squads10.isSelected() && !squads20.isSelected() && !squads30.isSelected()) {
 
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setHeaderText(null);
-                    alert.setContentText("Please select one");
-                    alert.showAndWait();            
+                    alert.alertbox("Please select one");
                 } 
                 else {
-                    jumping();
+                    Break(key);
                 }
             });
         Scene scene = new Scene(grid, 400, 550);
         squads.setScene(scene);
         squads.show();
     }
+   
     
-     public void jumping() {
-        
-        Stage jump =new Stage();
-        GridPane grid = new GridPane();
-        
-        grid.setPadding(new Insets(10));
-        grid.setVgap(10);
-        grid.setHgap(10);
-        
-        grid.setAlignment(Pos.TOP_CENTER);
-        jump.getIcons().add(logo);
-        
-        BackgroundImage view = new BackgroundImage(background,
-        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-        new BackgroundSize(jump.getWidth(), jump.getHeight(), false, false, false, true));
-        grid.setBackground(new Background(view));
-        
-        Logo.setFitWidth(100);
-        Logo.setFitHeight(100);
-        
-        HBox Logobox=new HBox();
-        Logobox.getChildren().add(Logo);
-        
-        Logobox.setAlignment(Pos.CENTER);
-        grid.add(Logobox, 0, 0,2,1);
-        
-        Logobox.setAlignment(Pos.CENTER);
-        
-        GridPane.setValignment(Logobox, VPos.TOP);
-        
-        HBox goalbox = new HBox();
-        Label setyourgoallabel = new Label("How many squads can you do?");
-
-        setyourgoallabel.setFont(Font.font(24));
-        goalbox.setAlignment(Pos.CENTER);
-
-        setyourgoallabel.setTextFill(Color.DIMGREY);
-        goalbox.getChildren().add(setyourgoallabel);
-
-        grid.add(goalbox, 0,2, 2, 1);
-
-        CheckBox jump30 = new CheckBox("For 30 seconds");
-        CheckBox jump50 = new CheckBox("For 50 seconds");
-        CheckBox jump60 = new CheckBox("For 60 seconds");
-        
-         jump30.setOnAction(e -> {
-            if (jump30.isSelected()) {
-                jump50.setSelected(false);
-                jump60.setSelected(false);
-                exercises.clear();
-                exercises.add("For 30 seconds");
-            }
-        });
-
-        jump50.setOnAction(e -> {
-            if (jump50.isSelected()) {
-                jump30.setSelected(false);
-                jump60.setSelected(false);
-                exercises.clear();
-                exercises.add("For 50 seconds");
-            }
-        });
-
-        jump60.setOnAction(e -> {
-            if (jump50.isSelected()) {
-                jump30.setSelected(false);
-                jump50.setSelected(false);
-                exercises.clear();
-                exercises.add("For 60 seconds");
-            }
-        });
-
-        VBox vBox = new VBox(10, jump30, jump50, jump60);
-        
-        
-        grid.add(vBox, 0, 4,2,1);
-        
-        HBox buttons=new HBox(70);
-        Button pushupbutton=new Button("Next");
-
-        buttons.setAlignment(Pos.CENTER);
-        pushupbutton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
-        buttons.getChildren().addAll(pushupbutton);
-
-        grid.add(buttons,0,5,2,1);
-        
-        pushupbutton.setOnAction(e-> {
-            if (!jump30.isSelected() && !jump50.isSelected() && !jump60.isSelected()) {
-
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setHeaderText(null);
-                    alert.setContentText("Please select one");
-                    alert.showAndWait();            
-                } 
-                else {
-                    Break();
-                }
-            });
-        Scene scene = new Scene(grid, 400, 550);
-        jump.setScene(scene);
-        jump.show();
-    }
-    
-     public void Break() {
-         Stage sliderbreak=new Stage();
+     public void Break(String key) {
+        Stage bbreak=new Stage();
         // Create a GridPane layout with some padding
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10));
@@ -479,11 +378,11 @@ public class Exercise {
         grid.setHgap(10);
         
         grid.setAlignment(Pos.TOP_CENTER);
-        sliderbreak.getIcons().add(logo);
+        bbreak.getIcons().add(logo);
         
         BackgroundImage view = new BackgroundImage(background,
         BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-        new BackgroundSize(sliderbreak.getWidth(), sliderbreak.getHeight(), false, false, false, true));
+        new BackgroundSize(bbreak.getWidth(), bbreak.getHeight(), false, false, false, true));
         grid.setBackground(new Background(view));
         
         Logo.setFitWidth(100);
@@ -508,18 +407,81 @@ public class Exercise {
         setyourgoallabel.setTextFill(Color.DIMGREY);
         goalbox.getChildren().add(setyourgoallabel);
 
-        grid.add(goalbox, 0,2, 2, 1);
-        // Create a Slider with options of 10, 20, and 30 seconds
-        Slider slider = new Slider(10, 30, 10);
-        slider.setMinorTickCount(0);
-        slider.setMajorTickUnit(10);
-        slider.setSnapToTicks(true);
-        slider.setShowTickLabels(true);
-        slider.setShowTickMarks(true);
-        grid.add(slider, 0, 3,2,1);
+        grid.add(goalbox, 0,3, 2, 1);
+        ComboBox<Integer> comboBox = new ComboBox<>();
+        comboBox.getItems().addAll(10, 20, 30);
+        comboBox.setValue(10); // set default value to 10
+        comboBox.setPrefSize(200, 10); // set size to match previous slider size
+        comboBox.setStyle("-fx-font-size: 30px;");
+        grid.add(comboBox, 0, 5, 2, 1);
+        
+        HBox buttonbox=new HBox(30);
+        Button submit=new Button("See your diet plan");
+        submit.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
+        buttonbox.setAlignment(Pos.CENTER);
+        buttonbox.getChildren().add(submit);
+        grid.add(buttonbox, 0, 9,2,1);
+        
+        System.out.println(exercises);
+        
+        comboBox.setOnAction(e-> {
+            
+            Integer selectedValue = comboBox.getValue();
+            exercises.add(Integer.toString(selectedValue));
+                  
+        });
+        System.out.println(exercises);
+
+        
+        
+
+        submit.setOnAction(e-> {            
+            try { 
+                FileInputStream file = new FileInputStream("user_data.txt");
+                Scanner scan=new Scanner(file);
+
+                ArrayList<String> updatedLines = new ArrayList<>();
+
+                while (scan.hasNextLine()) {
+
+                    String line = scan.nextLine();
+
+                    String[] parts = line.split(",");
+                    String username = parts[1];
+
+                    if(username.equals(key)) {
+
+                        line=line+","+"ExerciseplanStart";
+                        
+                        for (String item : exercises) {
+
+                             line=line+","+item;
+                        }
+                    }
+                    line=line+","+"ExerciseplanEnd"+",";
+
+                    // Write the updated line back to the fil
+                    updatedLines.add(line);
+
+                }
+
+               Files.write(Paths.get("user_data.txt"), updatedLines);
+           }
+            catch (IOException ex) {
+
+                // Handle the exception here
+                ex.printStackTrace();
+
+             }
+            
+            exercisedata.homeExercise(key);
+            bbreak.close();
+        });
+        
+
         Scene scene = new Scene(grid, 400, 550);
-        sliderbreak.setScene(scene);
-        sliderbreak.show();
+        bbreak.setScene(scene);
+        bbreak.show();
     }
     
 }

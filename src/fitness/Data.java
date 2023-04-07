@@ -36,6 +36,9 @@ import javafx.stage.Stage;
 
 public class Data {
     
+    Aalert alert=new Aalert();
+
+    
     Image logo = new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\logo.jpg");
     
     Image background=new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\background.jpg");
@@ -46,6 +49,8 @@ public class Data {
     DietData data=new DietData();
     
     Exercise exercisee=new Exercise();
+    
+    ExerciseData edata=new ExerciseData();
     
     boolean matchfound = false;
     
@@ -240,12 +245,7 @@ public class Data {
         nextbutton.setOnAction(e-> {
             
             if(heightTextField.getText().isEmpty() || weightTextField.getText().isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                
-                alert.setTitle("Error");
-                alert.setHeaderText("Please fill in the details");
-                
-                alert.showAndWait();
+                alert.alertbox("Please fill in the details");
             }
             
             else {
@@ -345,6 +345,8 @@ public class Data {
         // Set the tick marks and labels for the slider
         slider.setMajorTickUnit(1);
         slider.setMinorTickCount(0);
+        slider.setStyle("-fx-font-size: 30px;");
+
         
         slider.setShowTickLabels(true);
         slider.setShowTickMarks(true);
@@ -372,6 +374,7 @@ public class Data {
                 if (username.equals(email.getText())) {
                     
                     // Add height and weight data for this user
+                    
                     double difficultlevel=slider.getValue();
                     line = line + "," +difficultlevel;
                 }
@@ -537,12 +540,7 @@ public class Data {
         }
         if(!matchfound) {
                 
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-
-                alert.setContentText("Email not found");
-                alert.showAndWait();
-                
+                alert.alertbox("Email not found");                
         }
         else {
             ImageView diet = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\diet.png"));
@@ -589,7 +587,7 @@ public class Data {
         }
     }
     
-    public void printcheck(String key,int c) {
+    public void printcheck(String key) {
         
         Stage home = new Stage();
         
@@ -713,12 +711,7 @@ public class Data {
         }
         if(!matchfound) {
                 
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-
-                alert.setContentText("Email not found");
-                alert.showAndWait();
-                
+                alert.alertbox("Email not found");                
         }
         else {
             ImageView diet = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\diet.png"));
@@ -747,14 +740,53 @@ public class Data {
 
             grid.add(buttons,0,5,2,1);
 
+            ArrayList<String> lines = new ArrayList<>();
+            try {
+                
+                File file = new File("user_data.txt");
+                Scanner scanner = new Scanner(file);
+                int lineNum = 1;
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    String[] parts = line.split(",");
+                    String username=parts[1];
+                    if(key.equals(username)) {
+                        for(String item:parts) {
+                            lines.add(item);
+                        }
+                    } 
+                }
+            }
+            catch (IOException e) {
+
+                // Handle the exception here
+                e.printStackTrace();
+
+             } 
+            
+            
             dietbutton.setOnAction(e-> {
-                data.homediet(key,c);
-                home.close();
+                
+                if(lines.contains("DietplanStart")) {
+                    data.homediet(key);
+                    home.close();
+                }
+                else {
+                    diett.type(key);
+                }
             });
             
             exercisebutton.setOnAction(e-> {
-                exercisee.level(key);
-                home.close();
+                
+                if(lines.contains("ExerciseplanStart")) {
+                    edata.homeExercise(key);
+                    home.close();
+                }
+                else {
+                    exercisee.level(key);
+                }
+                
+                
 
             });
 

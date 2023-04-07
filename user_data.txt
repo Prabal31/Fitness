@@ -1,8 +1,4 @@
-prabh,prabh@gmail.com,1234567890,prabh@gmail.com,6,110,3.0555555555555554,2.0,Lentils,Quinoa,Barley,Leafy Greens,Kidney Beans,Apples,Banana,Almond Milk,Oat Milk,Chia Seeds,Black Beans,1,1,4,4,1
-atin,atin@gmail.com,1234567890,atin@gmail.com,6,130,3.611111111111111,2.0,Lentils,Quinoa,Barley,Leafy Greens,Kidney Beans,Apples,Banana,Almond Milk,Oat Milk,Chia Seeds,Black Beans,1,1,4,4,1
-aman,aman@gmail.com,1234567890,aman@gmail.com,6,120,3.3333333333333335,2.0,Lentils,Quinoa,Barley,Leafy Greens,Kidney Beans,Apples,Banana,Almond Milk,Oat Milk,Chia Seeds,Black Beans,bread,1,1,4,4,1
-sara,sara@gmail.com,1234567890,sara@gmail.com,6,90,2.5,2.0,Tofu,1,Lentils,1,Quinoa,1,Barley,1,Leafy Greens,1,Kidney Beans,1,Apples,1,Banana,1,Almond Milk,1,Oat Milk,1,Chia Seeds,1,Black Beans,1,bread,1,1,1,4,4,1
-dan,dan@gmail.com,1234567890,dan@gmail.com,6,80,2.2222222222222223,2.0,Lentils,Quinoa,Barley,Leafy Greens,Kidney Beans,Apples,Banana,Almond Milk,Oat Milk,Chia Seeds,Black Beans,paneer,1,1,4,4,1
-shubham,shubham@gmail.com,1234567890,shubham@gmail.com,7,100,2.0408163265306123,2.0,Lentils,Quinoa,Barley,Leafy Greens,Kidney Beans,Apples,Banana,Almond Milk,Oat Milk,Chia Seeds,Black Beans,paneer,1,4,4,1
-kkkk,kkk@gmail.com,1234567890,kkk@gmail.com,6,140,3.888888888888889,2.0,Lentils,Quinoa,Barley,Leafy Greens,Kidney Beans,Apples,Banana,Almond Milk,Oat Milk,Chia Seeds,Black Beans,lol,oo,iii,uuy,4,Lentils,Quinoa,Barley,Leafy Greens,Kidney Beans,Apples,Banana,Almond Milk,Oat Milk,Chia Seeds,Black Beans,lol,oo,iii,uuy,4,1
-lol,lol@gmail.com,1234567890,lol@gmail.com,7,120,2.4489795918367347,2.0,Lentils,Quinoa,Barley,Leafy Greens,Kidney Beans,Apples,Banana,Almond Milk,Oat Milk,Chia Seeds,Black Beans,orange,1
+Prabh,prabh@gmail.com,1234567890,prabh@gmail.com,7,120,2.4489795918367347,2.0,ExerciseplanStart,Advanced,10 to 20 pushups,20 to 30 squads,20,ExerciseplanEnd,,1,DietplanEnd,ExerciseplanEnd,,ExerciseplanEnd,
+atin,atin@gmail.com,1234567890,atin@gmail.com,6,120,3.3333333333333335,2.0,DietplanStart,Lentils,Quinoa,Barley,Leafy Greens,Kidney Beans,Apples,Banana,Almond Milk,Oat Milk,Chia Seeds,Black Beans,orange,1,DietplanEnd,ExerciseplanStart,Advanced,10 to 20 pushups,20 to 30 squads,20,ExerciseplanEnd,,ExerciseplanEnd,
+lol,lol@gmail.com,1234567890,lol@gmail.com,6,120,3.3333333333333335,2.0,ExerciseplanEnd,
+roop,roop@gmail.com,1234567890,roop@gmail.com,6,120,3.3333333333333335,2.0,ExerciseplanStart,Advanced,5 to 10 pushups,20 to 30 squads,20,ExerciseplanEnd,

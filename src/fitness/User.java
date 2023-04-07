@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -15,8 +13,6 @@ import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -36,6 +32,8 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class User extends Application {
+    
+    Aalert alert=new Aalert();
 
     TextField fullname = new TextField();
 
@@ -59,9 +57,11 @@ public class User extends Application {
     Diet diet=new Diet();
     
     DietData d=new DietData();
+    ExerciseData exercise =new ExerciseData();
     
     ArrayList<String> addedlist=new ArrayList<>();
     int c=0;
+    String key;
 
     public User(ArrayList<String> addedlist) {
         this.addedlist=addedlist;
@@ -183,45 +183,15 @@ public class User extends Application {
 
             if (userData == null) {
 
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setHeaderText(null);
-
-                alert.setContentText("Wrong email or password! please try again");
-                alert.showAndWait();
-            } else {
-                String key = emailTextField.getText();
-                String last;
+                alert.alertbox("Wrong email or password! please try again");
                 
+            } 
+            else {
+                key = emailTextField.getText();
                 
-                try { 
-                FileInputStream file = new FileInputStream("user_data.txt");
-                Scanner scan=new Scanner(file);
-
-                ArrayList<String> updatedLines = new ArrayList<>();
-                String l;
-                while (scan.hasNextLine()) {
-
-                    l = scan.nextLine();
-
-                    String[] parts = l.split(",");
-                    String username = parts[1];
-
-                    if(username.equals(key)) {
-                        
-                        c=Integer.parseInt(parts[parts.length-1]);
-                    }
-
-                }
-           }
-            catch (IOException ex) {
-
-                // Handle the exception here
-                ex.printStackTrace();
-
-             }
                 
                 // Proceed with the rest of the application
-                data.printcheck(key,c);
+                data.printcheck(key);
                 window.close();
 
             }
@@ -231,6 +201,7 @@ public class User extends Application {
             //data.goal();
             //heightweight();
             signup();
+            //exercise.homeExercise(key);
             //d.homediet();
             //diet.type();
             window.close();
@@ -297,7 +268,7 @@ public class User extends Application {
         fullnameLabel.setTextFill(Color.AQUA);
 
         fullnameLabel.setFont(Font.font(24));
-        TextField fullname = new TextField();
+        fullname = new TextField();
 
         fullname.setFont(Font.font(16));
         fullnameBox.getChildren().addAll(fullnameLabel, fullname);
@@ -313,7 +284,7 @@ public class User extends Application {
         emailLabel.setTextFill(Color.AQUA);
 
         emailLabel.setFont(Font.font(24));
-        TextField email = new TextField();
+        email = new TextField();
 
         email.setFont(Font.font(16));
         emailBox.getChildren().addAll(emailLabel, email);
@@ -328,7 +299,7 @@ public class User extends Application {
         conformemailLabel.setTextFill(Color.AQUA);
 
         conformemailLabel.setFont(Font.font(24));
-        TextField conformemail = new TextField();
+        conformemail = new TextField();
 
         conformemail.setFont(Font.font(16));
         conformemailBox.getChildren().addAll(conformemailLabel, conformemail);
@@ -343,7 +314,7 @@ public class User extends Application {
         phonenumberLabel.setTextFill(Color.AQUA);
 
         phonenumberLabel.setFont(Font.font(24));
-        TextField phonenumber = new TextField();
+        phonenumber = new TextField();
 
         phonenumber.setFont(Font.font(16));
         phonenumberBox.getChildren().addAll(phonenumberLabel, phonenumber);
@@ -358,7 +329,7 @@ public class User extends Application {
         passwordLabel.setTextFill(Color.AQUA);
 
         passwordLabel.setFont(Font.font(24));
-        PasswordField password = new PasswordField();
+        password = new PasswordField();
 
         password.setFont(Font.font(16));
         passwordBox.getChildren().addAll(passwordLabel, password);
@@ -430,12 +401,8 @@ public class User extends Application {
                     return; // exit the method
 
                 } catch (Exception ex) {
-
-                    Alert alert = new Alert(AlertType.ERROR);
-                    alert.setHeaderText(null);
-
-                    alert.setContentText(ex.getMessage());
-                    alert.showAndWait();
+                    String message=ex.getMessage();
+                    alert.alertbox(message);
 
                     break; // exit the loop and wait for user input again
                 }
@@ -481,10 +448,6 @@ public class User extends Application {
         }
 
         return emailExists;
-    }
-
-    public void photo() {
-
     }
 
     //main method

@@ -36,6 +36,8 @@ import javafx.stage.Stage;
 
 public class DietData {
     
+    Aalert alert=new Aalert();
+    
     Image logo = new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\logo.jpg");
     
     Image background=new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\background.jpg");
@@ -273,20 +275,14 @@ public class DietData {
             String foodItem = addItemTextField.getText();
             if (foodItem.isEmpty()) {
                 
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter the item name");
-                alert.showAndWait();
+                alert.alertbox("Please enter the item name");
                 
             }
             
             else {
                  if(foodList.contains(foodItem)){
                      
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setHeaderText(null);
-                    alert.setContentText("Item already exist");
-                    alert.showAndWait();
+                    alert.alertbox("Item already exist");
                 }
                  
                 else{
@@ -314,10 +310,7 @@ public class DietData {
             String foodItem = removeItemTextField.getText();
             if (foodItem.isEmpty()) {
                 
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter the item name");
-                alert.showAndWait();
+                alert.alertbox("Please enter the item name");
             } 
             
             else {
@@ -359,12 +352,14 @@ public class DietData {
 
                     if(username.equals(key)) {
 
+                        line=line+","+"DietplanStart";
+                        
                         for (String item : foodList) {
 
                              line=line+","+item;
                         }
                     }
-                    line=line+","+c;
+                    line=line+","+c+","+"DietplanEnd";
 
                     // Write the updated line back to the fil
                     updatedLines.add(line);
@@ -379,7 +374,7 @@ public class DietData {
                 ex.printStackTrace();
 
              }
-            homediet(key,c);
+            homediet(key);
         });
         
 
@@ -388,7 +383,7 @@ public class DietData {
        vegandiet.show();
     }
     
-    public void  homediet(String key,int c) {
+    public void  homediet(String key) {
         
         Stage home=new Stage();
         // Create three TextAreas
@@ -480,10 +475,16 @@ public class DietData {
 
          } 
          ArrayList<String> data=new ArrayList<>();
-         List<String> specificData = lines.subList(8, lines.size());
+        
+         int indexstart=lines.indexOf("DietplanStart");
+         int indexend=lines.indexOf("DietplanEnd");
+         int c=lines.indexOf("DietplanEnd")-1;
+         int value=Integer.parseInt(lines.get(indexend-1));
+
+         List<String> specificData = lines.subList(indexstart+1, indexend-1);
          System.out.println(specificData);
-         
-        ArrayList<String> last = new ArrayList<>(specificData.subList(specificData.size() - c-1, specificData.size()));
+                  
+        ArrayList<String> last = new ArrayList<>(specificData.subList(specificData.size() - value, specificData.size()));
 
          
         for (String item : specificData) {
@@ -506,8 +507,8 @@ public class DietData {
             catch (NumberFormatException e) {
                 // The value at index i is not a valid integer, do something else...
                 textArea4.appendText(last.get(i) + "\n");
+        }
     }
-}
          
         
         // Set up the scene and show the stage

@@ -20,6 +20,9 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Diet {
+    
+    Aalert alert=new Aalert();
+
 
     Image logo = new Image("D:\\Second Sem\\Java 2\\Fitness\\src\\fitness\\logo.jpg");
 
