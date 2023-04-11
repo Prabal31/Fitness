@@ -1,16 +1,11 @@
-prabh,prabh@gmail.com,6473357870,prabh@gmail.com,0,DietplanEnd
-atin,atin@gmail.com,1234567898,atin@gmail.com,0,DietplanEnd
-roop,roop@gmail.com,1234567890,roop@gmail.com,0,DietplanEnd
-atin,aatin@gmail.com,1234567890,atin@gmail.com,0,DietplanEnd
-ak,ak@gmail.com,1234567890,ak@gmail.com,7,140,2.857142857142857,2.0,7,120,2.4489795918367347,2.0,0,DietplanEnd
-LOL,lol@gmail.com,1234567890,lol@gmail.com,8,100,1.5625,2.0,0,DietplanEnd
-l,l0@gmail.com,1234567890,l@gmail.com,0,DietplanEnd
-l,lo@gmail.com,1234567890,lo@gmail.com,0,DietplanEnd
-lol,llol@gmail.com,1234567890,lol@gmail.com,7,120,2.4489795918367347,2.0,0,DietplanEnd
-GG,g@gmail.com,1234567890,g@gmail.com,8,126,1.96875,2.0,7,120,2.4489795918367347,2.0,0,DietplanEnd
-h,hh@gmail.com,1234567890,h@gmail.com,7,10,0.20408163265306123,2.0,0,DietplanEnd
-r,r@gmail.com,1234567890,r@gmail.com,7,120,2.4489795918367347,2.0,0,DietplanEnd
-p,p@gmail.com,1234567870,p@gmail.com,8,120,1.875,2.0,0,DietplanEnd
-a,ak@gmail.com,1234567890,ak@gmail.com,7,120,2.4489795918367347,2.0,0,DietplanEnd
-g,g@gmail.com,1234567890,g@gmail.com,7,120,2.4489795918367347,2.0,0,DietplanEnd
-e,e@gmail.com,1234567890,e@gmail.com,7,120,2.4489795918367347,2.0,DietplanStart,Tofu,Lentils,Quinoa,Barley,Leafy Greens,Kidney Beans,Apples,Banana,Almond Milk,Oat Milk,Chia Seeds,Black Beans,0,DietplanEnd
+p,p@gmail.com,1234556673,p@gmail.com,7,120,2.4489795918367347,2.0,ExerciseplanStart,Advanced,10 to 20 pushups,20 to 30 squads,30,ExerciseplanEnd,,ExerciseplanEnd,,ExerciseplanEnd,,ExerciseplanEnd,,ExerciseplanEnd,,1,DietplanEnd
+a,a@gmail.com,1234567890,a@gmail.com,6,120,3.3333333333333335,2.0,ExerciseplanStart,Advanced,10 to 20 pushups,20 to 30 squads,30,ExerciseplanEnd,,ExerciseplanEnd,,ExerciseplanEnd,,ExerciseplanEnd,,1,DietplanEnd
+g,g@gmail.com,1234567890,g@gmail.com,7,120,2.4489795918367347,2.0,ExerciseplanStart,Advanced,10 to 20 pushups,10 to 20 squads,30,ExerciseplanEnd,,ExerciseplanEnd,,ExerciseplanEnd,,1,DietplanEnd
+a,aaa@gmail.com,1234567890,aaa@gmail.com,6,120,3.3333333333333335,2.0,ExerciseplanStart,Advanced,10 to 20 pushups,20 to 30 squads,30,ExerciseplanEnd,,ExerciseplanEnd,,1,DietplanEnd
+d,d@gmail.com,1234567890,d@gmail.com,dd,ddd,NaN,ExerciseplanEnd,,1,DietplanEnd
+k,k@gmail.com,1234567890,k@gmail.com,ExerciseplanEnd,,1,DietplanEnd
+aa,aaaaaa@gmail.com,1234567890,aa@gmail.com,12,12,0.08333333333333333,2.0,ExerciseplanStart,Advanced,10 to 20 pushups,20 to 30 squads,30,ExerciseplanEnd,,DietplanStart,Tofu,Lentils,Quinoa,Barley,Leafy Greens,Kidney Beans,Apples,Banana,Almond Milk,Oat Milk,Chia Seeds,Black Beans,Green Curry,Spinach Pesto,Lentil Soup,hhh,1,DietplanEnd
+g,gg@gmail.com,1234567890,g@gmail.com,5,1,0.04,2.0
+k,kk@gmail.com,1234567890,k@gmail.com
+f,f@gmail.com,1234567890,f@gmail.com,180,80,0.24691358024691357
+d,dd@gmail.com,1234567890,d@gmail.com,180,80,24.691358024691358,180,80,24.691358024691358,180,80,24.691358024691358,180,80,24.691358024691358,180,75,23.148148148148145

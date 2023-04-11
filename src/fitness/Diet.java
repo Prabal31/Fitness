@@ -141,6 +141,9 @@ public class Diet {
         foodList.add("Oat Milk");
         foodList.add("Chia Seeds");
         foodList.add("Black Beans");
+        foodList.add("Green Curry");
+        foodList.add("Spinach Pesto");
+        foodList.add("Lentil Soup");
         // handle opening vegan menu
 
         data.vegan(foodList, key);

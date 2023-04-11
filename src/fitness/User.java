@@ -30,8 +30,8 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class User extends Application {
-    
-    Aalert alert=new Aalert();
+
+    Aalert alert = new Aalert();
 
     TextField fullname = new TextField();
 
@@ -52,13 +52,13 @@ public class User extends Application {
     Image background = new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\background.jpg");
 
     ImageView Logo = new ImageView(logo);
-        
-    ArrayList<String> addedlist=new ArrayList<>();
-    int c=0;
+
+    ArrayList<String> addedlist = new ArrayList<>();
+    int c = 0;
     String key;
 
     public User(ArrayList<String> addedlist) {
-        this.addedlist=addedlist;
+        this.addedlist = addedlist;
     }
 
     public User() {
@@ -77,8 +77,8 @@ public class User extends Application {
 
         // Set the properties of the image view
         BackgroundImage view = new BackgroundImage(background,
-            BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-            new BackgroundSize(window.getWidth(), window.getHeight(), false, false, false, true));
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                new BackgroundSize(window.getWidth(), window.getHeight(), false, false, false, true));
         layout.setBackground(new Background(view));
 
         Logo.setFitWidth(100);
@@ -178,12 +178,10 @@ public class User extends Application {
             if (userData == null) {
 
                 alert.alertbox("Wrong email or password! please try again");
-                
-            } 
-            else {
+
+            } else {
                 key = emailTextField.getText();
-                
-                
+
                 // Proceed with the rest of the application
                 data.printcheck(key);
 
@@ -233,9 +231,8 @@ public class User extends Application {
 
         HBox headingbox = new HBox();
         Label tracker = new Label("My Fitness Tracker");
-        
-        tracker.setTextFill(Color.BLACK);
 
+        tracker.setTextFill(Color.BLACK);
 
         tracker.setFont(Font.font(35));
         headingbox.setAlignment(Pos.TOP_CENTER);
@@ -397,7 +394,7 @@ public class User extends Application {
                     return; // exit the method
 
                 } catch (Exception ex) {
-                    String message=ex.getMessage();
+                    String message = ex.getMessage();
                     alert.alertbox(message);
 
                     break; // exit the loop and wait for user input again
@@ -433,7 +430,7 @@ public class User extends Application {
 
             while ((line = reader.readLine()) != null) {
 
-                if (line.equals(email)) {
+                if (line.contains(email)) {
 
                     emailExists = true;
                     break;

@@ -148,7 +148,10 @@ public class Data {
         
         // Create text fields for entering height and weight
         TextField heightTextField = new TextField();
+        heightTextField.setPromptText("Centimeters");
+        
         TextField weightTextField = new TextField();
+        weightTextField.setPromptText("KG");
         
         // Create a GridPane to contain the labels and text fields
         
@@ -175,6 +178,8 @@ public class Data {
 
         calculateButton.setOnAction(event -> {
             
+    
+            
             if(heightTextField.getText().isEmpty() || weightTextField.getText().isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 
@@ -183,11 +188,17 @@ public class Data {
                 alert.setHeaderText("Please fill in the details");
                 alert.showAndWait();
             }
+            
+            else if (!heightTextField.getText().matches("\\d+") || !weightTextField.getText().matches("\\d+")) {
+                alert.alertbox("Please enter valid data");
+            }
+            
             else {
+                
                 double height = Double.parseDouble(heightTextField.getText());
                 double weight = Double.parseDouble(weightTextField.getText());
                 
-                double bmi = weight / (height * height);
+                double bmi = weight / ((height/100)*(height/100));
 
                 // Create an Alert box to display the BMI
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -584,12 +595,10 @@ public class Data {
 
         dietbutton.setOnAction(e-> {
             diett.type(key);
-            home.close();
         });
 
         exercisebutton.setOnAction(e-> {
             exercisee.level(key);
-            home.close();
 
         });
 
@@ -793,7 +802,6 @@ public class Data {
                 
                 if(lines.contains("DietplanStart")) {
                     data.homediet(key);
-                    home.close();
                 }
                 else {
                     diett.type(key);
@@ -804,7 +812,6 @@ public class Data {
                 
                 if(lines.contains("ExerciseplanStart")) {
                     edata.homeExercise(key);
-                    home.close();
                 }
                 else {
                     exercisee.level(key);

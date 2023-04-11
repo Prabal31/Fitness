@@ -339,6 +339,7 @@ public class Exercise {
                 } 
                 else {
                     Break(key);
+                    squads.close();
                 }
             });
         Scene scene = new Scene(grid, 400, 550);

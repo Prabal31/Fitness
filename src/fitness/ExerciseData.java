@@ -9,6 +9,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -87,12 +88,15 @@ public class ExerciseData {
 
         } 
         ArrayList<String> data=new ArrayList<>();
+        System.out.println(lines);
         int indexstart=lines.indexOf("ExerciseplanStart");
         int indexend=lines.indexOf("ExerciseplanEnd");
-        List<String> specificData = lines.subList(indexstart+1, indexend-1);
+        List<String> specificData = lines.subList(indexstart+1, indexend);
         String levelvalue=specificData.get(0);
         String pushupvalue=specificData.get(1);
         String squadsvalue=specificData.get(2);
+        System.out.println(specificData);
+        String time=specificData.get(3);
         int lp,pv,sv;
         if(levelvalue.equals("Beginner")) {
            lp=1;
@@ -129,20 +133,20 @@ public class ExerciseData {
         ImageView jump = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\jump.png"));
         ImageView strech = new ImageView(new Image("D:\\Second Sem\\Java 2\\Fitness\\images\\strech.png"));
         
-        mountain.setFitWidth(70);
-        mountain.setFitHeight(70);
+        mountain.setFitWidth(60);
+        mountain.setFitHeight(60);
         
-        squads.setFitWidth(70);
-        squads.setFitHeight(70);
+        squads.setFitWidth(60);
+        squads.setFitHeight(60);
         
-        pushup.setFitWidth(70);
-        pushup.setFitHeight(70);
+        pushup.setFitWidth(60);
+        pushup.setFitHeight(60);
         
-        jump.setFitWidth(70);
-        jump.setFitHeight(70);
+        jump.setFitWidth(60);
+        jump.setFitHeight(60);
         
-        strech.setFitWidth(70);
-        strech.setFitHeight(70);
+        strech.setFitWidth(60);
+        strech.setFitHeight(60);
         
         
         
@@ -209,6 +213,26 @@ public class ExerciseData {
         grid.add(strechBox, 0, 5);
         grid.add(strechBoxlabel, 1, 5);
 
+        HBox buttonbox=new HBox();
+        Button homeButton=new Button("Home");
+        homeButton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
+        buttonbox.getChildren().add(homeButton);
+        homeButton.setAlignment(Pos.CENTER);
+        
+        homeButton.setOnAction(e->{
+            home.close();
+        });
+        
+         grid.add(buttonbox,0,6,2,1);
+         
+        HBox labelbox=new HBox();
+        Label homelabel=new Label("Take a break of after every exercise for "+time+" seconds");
+        labelbox.getChildren().add(homelabel);
+        labelbox.setAlignment(Pos.CENTER);
+        
+        
+         grid.add(labelbox,0,8,2,1);
+        
         
         
         Scene scene = new Scene(grid,400,550);

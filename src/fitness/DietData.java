@@ -233,6 +233,7 @@ public class DietData {
 
         // Create TextArea
         TextArea tempList = new TextArea();
+        tempList.setEditable(false);
         tempList.setPrefHeight(326);
         tempList.setPrefWidth(200);
         tempList.setStyle("-fx-border-color: black;");
@@ -326,6 +327,9 @@ public class DietData {
                     tempList.setText(newText);
                     removeItemTextField.clear();
                 }
+                else {
+                    alert.alertbox("Please enter the right name ");
+                }
             }
         });
         
@@ -375,6 +379,7 @@ public class DietData {
 
              }
             homediet(key);
+            vegandiet.close();
         });
         
 
@@ -427,9 +432,13 @@ public class DietData {
         
         HBox textareabox=new HBox();
         TextArea textArea1 = new TextArea();
+        textArea1.setEditable(false);
         TextArea textArea2 = new TextArea();
+        textArea2.setEditable(false);
         TextArea textArea3 = new TextArea();
+        textArea3.setEditable(false);
         TextArea textArea4 = new TextArea();
+        textArea4.setEditable(false);
 
         textareabox.getChildren().addAll(textArea1,textArea2,textArea3,textArea4);
         grid.add(textareabox, 0, 4,2,1);
@@ -495,7 +504,7 @@ public class DietData {
            } else if (item.equals("Apples") || item.equals("Banana") || item.equals("Almond Milk") ||
                       item.equals("Oat Milk") || item.equals("Chia Seeds")) {
                textArea2.appendText(item+"\n");
-           } else if (item.equals("Black Beans")) {
+           } else if (item.equals("Black Beans")||item.equals("Green Curry")||item.equals("Spinach Pesto")||item.equals("Lentil Soup")) {
                textArea3.appendText(item+"\n");
            }
        }
@@ -515,6 +524,10 @@ public class DietData {
         homeButton.setStyle("-fx-background-color:#4CAF50; -fx-text-fill:white;");
         button.getChildren().add(homeButton);
         homeButton.setAlignment(Pos.CENTER);
+        
+        homeButton.setOnAction(e->{
+            home.close();
+        });
         
         grid.add(button,0,10,2,1);
         
