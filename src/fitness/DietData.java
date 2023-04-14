@@ -274,7 +274,13 @@ public class DietData {
         addItem.setOnAction(e -> {
             
             String foodItem = addItemTextField.getText();
-            if (foodItem.isEmpty()) {
+            
+            if (!foodItem.matches("[a-zA-Z]+")) {
+                
+                alert.alertbox("Error: Please enter only string values.");
+            
+            }
+            else if (foodItem.isEmpty()) {
                 
                 alert.alertbox("Please enter the item name");
                 
